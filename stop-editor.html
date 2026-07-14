@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KSRTC Stop Editor</title>
+<link href="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4/dist/maplibre-gl.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0f1117;
+  color: #e2e8f0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Panel ───────────────────────────────────────────── */
+#panel {
+  width: 320px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  background: #161b27;
+  border-right: 1px solid #2a3040;
+  overflow: hidden;
+}
+
+#panel-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #2a3040;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#panel-header h1 { font-size: 13px; font-weight: 600; color: #94a3b8; letter-spacing: .5px; flex: 1; }
+.hdr-btn {
+  font-size: 11px; padding: 4px 10px;
+  background: #1e293b; border: 1px solid #334155;
+  color: #94a3b8; border-radius: 5px; cursor: pointer;
+}
+.hdr-btn:hover { background: #273449; color: #e2e8f0; }
+
+#panel-body {
+  flex: 1; overflow-y: auto;
+  padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+/* ── No-data ─────────────────────────────────────────── */
+#no-data {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; color: #475569; font-size: 13px;
+  text-align: center; padding: 24px;
+}
+#no-data svg { opacity: .3; }
+
+/* ── Editor ──────────────────────────────────────────── */
+#editor { display: none; flex-direction: column; gap: 14px; }
+
+/* ── Filter chips ────────────────────────────────────── */
+#filter-row {
+  display: flex; gap: 5px; flex-wrap: wrap;
+}
+.chip {
+  padding: 4px 10px; border-radius: 20px; font-size: 11px;
+  font-weight: 600; cursor: pointer; border: 1px solid transparent;
+  transition: all .15s; user-select: none;
+}
+.chip-all      { background: #1e293b; border-color: #334155; color: #94a3b8; }
+.chip-estimate { background: #1e293b; border-color: #334155; color: #60a5fa; }
+.chip-default  { background: #1e293b; border-color: #334155; color: #f87171; }
+.chip-manual   { background: #1e293b; border-color: #334155; color: #34d399; }
+.chip.active.chip-all      { background: #334155; border-color: #64748b; color: #f1f5f9; }
+.chip.active.chip-estimate { background: #1e3a5f; border-color: #3b82f6; color: #93c5fd; }
+.chip.active.chip-default  { background: #3f1515; border-color: #ef4444; color: #fca5a5; }
+.chip.active.chip-manual   { background: #14352a; border-color: #22c55e; color: #86efac; }
+
+#search-filter-input {
+  margin-top: 8px; width: 100%;
+  background: #0f1117; border: 1px solid #2a3040;
+  color: #e2e8f0; padding: 7px 10px;
+  border-radius: 6px; font-size: 13px;
+}
+#search-filter-input:focus { outline: none; border-color: #3b82f6; }
+
+/* ── Toggle switch ───────────────────────────────────── */
+.toggle-row { display: flex; align-items: center; gap: 9px; }
+.switch { position: relative; display: inline-block; width: 34px; height: 20px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch-slider {
+  position: absolute; inset: 0; cursor: pointer;
+  background: #1e293b; border: 1px solid #334155;
+  border-radius: 20px; transition: all .15s;
+}
+.switch-slider::before {
+  content: ""; position: absolute; height: 14px; width: 14px;
+  left: 2px; top: 2px; background: #64748b; border-radius: 50%;
+  transition: all .15s;
+}
+.switch input:checked + .switch-slider { background: #1e3a5f; border-color: #3b82f6; }
+.switch input:checked + .switch-slider::before { transform: translateX(14px); background: #93c5fd; }
+.switch input:disabled + .switch-slider { cursor: default; opacity: .4; }
+.toggle-label { font-size: 12px; color: #94a3b8; user-select: none; }
+.toggle-label.disabled { color: #475569; }
+
+/* ── Navigation ──────────────────────────────────────── */
+#nav { display: flex; align-items: center; gap: 6px; }
+.nav-btn {
+  width: 34px; height: 34px; background: #1e293b;
+  border: 1px solid #334155; color: #e2e8f0;
+  border-radius: 6px; cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .1s;
+}
+.nav-btn:hover { background: #273449; }
+.nav-btn:disabled { opacity: .35; cursor: default; }
+#counter { flex: 1; text-align: center; font-size: 12px; color: #64748b; }
+
+/* ── Stop info ───────────────────────────────────────── */
+#stop-name { font-size: 15px; font-weight: 700; color: #f1f5f9; line-height: 1.3; }
+#city-name { font-size: 12px; color: #64748b; margin-top: 3px; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; letter-spacing: .3px;
+}
+.badge::before { content: "●"; font-size: 8px; }
+.badge-estimate { background: #1e3a5f; color: #60a5fa; }
+.badge-default  { background: #3f1515; color: #f87171; }
+.badge-manual   { background: #14352a; color: #34d399; }
+
+/* ── Fields ──────────────────────────────────────────── */
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 10px; font-weight: 600; color: #475569; letter-spacing: .8px; text-transform: uppercase; }
+.field input {
+  background: #0f1117; border: 1px solid #2a3040;
+  color: #e2e8f0; padding: 7px 10px;
+  border-radius: 6px; font-size: 13px; width: 100%;
+}
+.field input:focus { outline: none; border-color: #3b82f6; }
+
+.coords-row { display: flex; gap: 8px; }
+.coords-row .field { flex: 1; }
+
+/* ── Nominatim ───────────────────────────────────────── */
+#search-wrap { display: flex; gap: 6px; }
+#search-wrap input {
+  flex: 1; background: #0f1117; border: 1px solid #2a3040;
+  color: #e2e8f0; padding: 7px 10px; border-radius: 6px; font-size: 13px;
+}
+#search-wrap input:focus { outline: none; border-color: #3b82f6; }
+#search-btn {
+  background: #1d4ed8; border: none; color: white;
+  padding: 7px 11px; border-radius: 6px; cursor: pointer; font-size: 13px;
+}
+#search-btn:hover { background: #2563eb; }
+#search-btn:disabled { opacity: .5; cursor: default; }
+
+#search-results { border-radius: 6px; overflow: hidden; border: 1px solid #2a3040; }
+#search-results:empty { display: none; }
+.result-item {
+  padding: 8px 10px; font-size: 11px; color: #94a3b8;
+  cursor: pointer; border-bottom: 1px solid #1e2635; line-height: 1.4;
+}
+.result-item:last-child { border-bottom: none; }
+.result-item:hover { background: #1e293b; color: #e2e8f0; }
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn-primary {
+  background: #1d4ed8; border: none; color: white;
+  padding: 9px; border-radius: 6px; cursor: pointer;
+  font-size: 13px; font-weight: 600; width: 100%;
+}
+.btn-primary:hover { background: #2563eb; }
+.btn-secondary {
+  background: #1e293b; border: 1px solid #334155;
+  color: #94a3b8; padding: 9px; border-radius: 6px;
+  cursor: pointer; font-size: 13px; width: 100%;
+}
+.btn-secondary:hover { background: #273449; color: #e2e8f0; }
+
+.sep { border: none; border-top: 1px solid #1e2635; }
+
+/* ── Route context ───────────────────────────────────── */
+#context-section { display: flex; flex-direction: column; gap: 6px; }
+.ctx-label {
+  font-size: 10px; font-weight: 600; color: #475569;
+  letter-spacing: .8px; text-transform: uppercase; margin-bottom: 2px;
+}
+.ctx-list { display: flex; flex-direction: column; gap: 3px; }
+.ctx-item {
+  font-size: 11px; color: #94a3b8; display: flex; align-items: baseline; gap: 5px;
+}
+.ctx-arrow { color: #475569; flex-shrink: 0; font-size: 10px; }
+.ctx-stop  { color: #cbd5e1; }
+.ctx-city  { color: #475569; font-size: 10px; }
+.ctx-none  { font-size: 11px; color: #334155; font-style: italic; }
+#context-hint {
+  font-size: 10px; color: #334155; font-style: italic;
+}
+
+/* ── Status bar ──────────────────────────────────────── */
+#status-bar {
+  padding: 8px 16px; font-size: 11px; color: #475569;
+  border-top: 1px solid #1e2635; min-height: 32px; line-height: 16px;
+}
+
+#map { flex: 1; }
+</style>
+</head>
+<body>
+
+<div id="panel">
+  <div id="panel-header">
+    <h1>KSRTC Stop Editor</h1>
+    <button class="hdr-btn" onclick="openFile()">Open file</button>
+    <button class="hdr-btn" onclick="saveToFile()">Save file</button>
+    <button class="hdr-btn" onclick="openStopTimes()" id="btn-st" title="Load stop_times.txt">stop_times</button>
+    <input type="file" id="file-input" accept=".geojson,.json" style="display:none">
+    <input type="file" id="st-input" accept=".txt,.csv" style="display:none">
+  </div>
+
+  <div id="panel-body">
+
+    <div id="no-data">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        <circle cx="12" cy="9" r="2.5"/>
+      </svg>
+      <span>Loading ksrtc-stops.geojson…</span>
+    </div>
+
+    <div id="editor">
+
+      <!-- Filter -->
+      <div>
+        <div class="field-label">Filter by source</div>
+        <div id="filter-row" style="margin-top:6px;">
+          <span class="chip chip-all active"    data-filter=""         onclick="setFilter(this)">All</span>
+          <span class="chip chip-estimate"       data-filter="estimate" onclick="setFilter(this)">Estimate</span>
+          <span class="chip chip-default"        data-filter="default"  onclick="setFilter(this)">Default</span>
+          <span class="chip chip-manual"         data-filter="manual"   onclick="setFilter(this)">Manual</span>
+        </div>
+        <input type="text" id="search-filter-input" placeholder="Search stop or city name…"
+               oninput="onSearchFilterInput(this)">
+      </div>
+
+      <div>
+        <div class="field-label">Coverage</div>
+        <div class="toggle-row" style="margin-top:8px;">
+          <label class="switch" title="Load stop_times.txt to enable">
+            <input type="checkbox" id="toggle-intable" onchange="toggleIntable(this)" disabled>
+            <span class="switch-slider"></span>
+          </label>
+          <span class="toggle-label disabled" id="toggle-intable-label">Only in stop_times</span>
+        </div>
+        <div class="field" style="margin-top:10px;max-width:110px;">
+          <label>Context line depth</label>
+          <input type="number" id="depth-input" min="0" max="6" step="1" value="2" onchange="onDepthChanged()">
+        </div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- Navigation -->
+      <div id="nav">
+        <button class="nav-btn" id="btn-prev" onclick="prev()" title="Previous (←)">‹</button>
+        <span id="counter">— / —</span>
+        <button class="nav-btn" id="btn-next" onclick="next()" title="Next (→)">›</button>
+      </div>
+
+      <!-- Stop info -->
+      <div>
+        <div id="stop-name">—</div>
+        <div id="city-name">—</div>
+        <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <span id="source-badge" class="badge">—</span>
+          <span id="match-notice" style="display:none;font-size:10px;font-weight:600;color:#a78bfa;letter-spacing:.3px;">
+            ✦ coords from matching manual entry
+          </span>
+        </div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- Coordinates -->
+      <div>
+        <div style="font-size:10px;font-weight:600;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;">
+          Coordinates — drag marker or type
+        </div>
+        <div class="coords-row">
+          <div class="field">
+            <label>Latitude</label>
+            <input type="number" id="lat-input" step="0.000001" onchange="onCoordsTyped()">
+          </div>
+          <div class="field">
+            <label>Longitude</label>
+            <input type="number" id="lon-input" step="0.000001" onchange="onCoordsTyped()">
+          </div>
+        </div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- Nominatim -->
+      <div>
+        <div style="font-size:10px;font-weight:600;color:#475569;letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;">
+          Search Nominatim
+        </div>
+        <div id="search-wrap">
+          <input type="text" id="search-input" placeholder="Search for a location…">
+          <button id="search-btn" onclick="doSearch()">Search</button>
+        </div>
+        <div id="search-results" style="margin-top:6px;"></div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- Route context -->
+      <div id="context-section">
+        <div class="ctx-label">Route context</div>
+        <div id="ctx-before-wrap">
+          <div style="font-size:10px;color:#475569;margin-bottom:3px;">Before</div>
+          <div id="ctx-before" class="ctx-list"></div>
+        </div>
+        <div id="ctx-after-wrap" style="margin-top:4px;">
+          <div style="font-size:10px;color:#475569;margin-bottom:3px;">After</div>
+          <div id="ctx-after" class="ctx-list"></div>
+        </div>
+        <div id="context-hint">Load stop_times.txt to see route context</div>
+      </div>
+
+      <hr class="sep">
+
+      <!-- Actions -->
+      <button class="btn-primary" onclick="saveStop()">Save stop &nbsp;(S)</button>
+
+    </div>
+  </div>
+
+  <div id="status-bar">Trying to load ksrtc-stops.geojson…</div>
+</div>
+
+<div id="map"></div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+let geojson      = null;
+let features     = [];    // all GeoJSON features
+let allDeduped   = [];    // unique stop_name+city_name entries
+let filtered     = [];    // filtered subset of allDeduped
+let listIdx      = 0;
+let activeFilter = '';
+let onlyInTable  = false;   // "Only in stop_times" toggle
+let searchQuery  = '';      // free-text filter on stop_name/city_name
+let contextDepth = 2;       // how many neighbor hops of context lines to draw
+let contextLinesToken = 0;  // guards against a stale deferred draw overwriting a newer one
+let fileHandle   = null;
+
+// stop_times adjacency: Map<stop_id_str, {prev: Set<stop_id_str>, next: Set<stop_id_str>}>
+let stopAdj      = null;
+// stop_id -> {stop_name, city_name} from the loaded geojson
+let stopIdInfo   = {};
+
+// ── Deduplication helpers ─────────────────────────────────────────────────────
+function stopKey(stopName, cityName) {
+  return `${(stopName || '').trim().toUpperCase()}|${(cityName || '').trim().toUpperCase()}`;
+}
+
+// default(0) < estimate(1) < manual(2)
+function sourceRank(s) { return s === 'manual' ? 2 : s === 'estimate' ? 1 : 0; }
+
+// Build one entry per unique stop_name+city_name (post-migration this is
+// usually 1:1 with features, since the backend's composite stop_id already
+// collapses same-city/same-name duplicates — this grouping is now mostly a
+// defensive net for older/hand-edited data).
+// effectiveSource = worst (lowest rank) source in the group — drives filter display.
+// Coords come from the highest-rank (most trusted) source in the group.
+// ids = every raw stop_id in this group — used to join against stop_times.txt.
+function buildDeduped() {
+  const map = new Map();
+  for (const f of features) {
+    const key = stopKey(f.properties.stop_name, f.properties.city_name);
+    const rank = sourceRank(f.properties.source);
+    const [lon, lat] = f.geometry.coordinates;
+    const sid = String(f.properties.stop_id);
+    if (!map.has(key)) {
+      map.set(key, {
+        key,
+        stop_name:       f.properties.stop_name,
+        city_name:       f.properties.city_name,
+        effectiveSource: f.properties.source,   // worst seen
+        coordSource:     f.properties.source,   // best seen
+        ids:             new Set([sid]),
+        lat, lon,
+      });
+    } else {
+      const e = map.get(key);
+      e.ids.add(sid);
+      if (rank < sourceRank(e.effectiveSource)) e.effectiveSource = f.properties.source;
+      if (rank > sourceRank(e.coordSource)) {
+        e.coordSource = f.properties.source;
+        e.lat = lat; e.lon = lon;
+      }
+    }
+  }
+  allDeduped = [...map.values()];
+}
+
+// ── stop_times loading & adjacency ───────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (!lines.length) return [];
+  const headers = lines[0].split(',').map(h => h.trim());
+  return lines.slice(1).map(line => {
+    const vals = line.split(',');
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (vals[i] || '').trim(); });
+    return obj;
+  });
+}
+
+function buildAdjacency(rows) {
+  // Group by trip_id, sort by stop_sequence
+  const trips = new Map();
+  for (const r of rows) {
+    if (!r.trip_id || !r.stop_id) continue;
+    if (!trips.has(r.trip_id)) trips.set(r.trip_id, []);
+    trips.get(r.trip_id).push({ sid: String(r.stop_id), seq: parseInt(r.stop_sequence, 10) || 0 });
+  }
+  const adj = new Map();
+  const ensure = id => { if (!adj.has(id)) adj.set(id, { prev: new Set(), next: new Set() }); };
+  for (const stops of trips.values()) {
+    stops.sort((a, b) => a.seq - b.seq);
+    for (let i = 0; i < stops.length; i++) {
+      const cur = stops[i].sid;
+      ensure(cur);
+      if (i > 0)                  { ensure(stops[i-1].sid); adj.get(cur).prev.add(stops[i-1].sid); }
+      if (i < stops.length - 1)   { ensure(stops[i+1].sid); adj.get(cur).next.add(stops[i+1].sid); }
+    }
+  }
+  return adj;
+}
+
+function initStopTimes(text) {
+  const rows = parseCSV(text);
+  stopAdj = buildAdjacency(rows);
+  document.getElementById('btn-st').style.color = '#34d399';
+
+  const toggle = document.getElementById('toggle-intable');
+  toggle.disabled = false;
+  toggle.closest('.switch').title = 'Only show stops that appear in the loaded stop_times.txt';
+  document.getElementById('toggle-intable-label').classList.remove('disabled');
+
+  // Re-apply so the toggle (if already on) narrows the list now that we can
+  if (allDeduped.length) applyFilter();
+  else if (filtered.length) showContext(filtered[listIdx]);
+}
+
+async function openStopTimes() {
+  if ('showOpenFilePicker' in window) {
+    try {
+      const [handle] = await window.showOpenFilePicker({
+        types: [{ description: 'GTFS stop_times', accept: { 'text/plain': ['.txt', '.csv'] } }],
+      });
+      initStopTimes(await (await handle.getFile()).text());
+      return;
+    } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  document.getElementById('st-input').click();
+}
+
+document.getElementById('st-input').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => initStopTimes(ev.target.result);
+  r.readAsText(f);
+});
+
+async function tryFetchStopTimes() {
+  try {
+    const resp = await fetch('./gtfs/stop_times.txt');
+    if (!resp.ok) return;
+    initStopTimes(await resp.text());
+  } catch { /* silently ignore — user can load manually */ }
+}
+
+// Build stop_id -> {stop_name, city_name} index from geojson features
+function buildStopIdInfo() {
+  stopIdInfo = {};
+  for (const f of features) {
+    const sid = String(f.properties.stop_id);
+    if (!stopIdInfo[sid]) {
+      const [lon, lat] = f.geometry.coordinates;
+      stopIdInfo[sid] = { stop_name: f.properties.stop_name, city_name: f.properties.city_name, lat, lon };
+    }
+  }
+}
+
+function showContext(entry) {
+  const hint = document.getElementById('context-hint');
+  const beforeEl = document.getElementById('ctx-before');
+  const afterEl  = document.getElementById('ctx-after');
+  document.getElementById('ctx-before-wrap').style.display = 'none';
+  document.getElementById('ctx-after-wrap').style.display  = 'none';
+  hint.style.display = 'none';
+
+  if (!stopAdj) {
+    hint.textContent = 'Load stop_times.txt to see route context';
+    hint.style.display = 'block';
+    clearContextLines();
+    return;
+  }
+
+  // Every raw stop_id in this deduped entry
+  const ids = [...entry.ids];
+
+  // Union prev/next across all ids
+  const prevIds = new Set(), nextIds = new Set();
+  for (const id of ids) {
+    const a = stopAdj.get(id);
+    if (!a) continue;
+    a.prev.forEach(p => prevIds.add(p));
+    a.next.forEach(n => nextIds.add(n));
+  }
+  // Remove self-references
+  ids.forEach(id => { prevIds.delete(id); nextIds.delete(id); });
+
+  scheduleContextLines(entry, ids);
+
+  function renderIds(set, el, wrap) {
+    if (!set.size) return;
+    // Deduplicate by stop_name+city_name
+    const seen = new Set();
+    const items = [];
+    for (const sid of set) {
+      const info = stopIdInfo[sid];
+      if (!info) continue;
+      const k = stopKey(info.stop_name, info.city_name);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      items.push(info);
+    }
+    if (!items.length) return;
+    el.innerHTML = items.map(info =>
+      `<div class="ctx-item">
+        <span class="ctx-stop">${info.stop_name || '?'}</span>
+        <span class="ctx-city">${info.city_name ? '· ' + info.city_name : ''}</span>
+      </div>`
+    ).join('');
+    wrap.style.display = 'block';
+  }
+
+  renderIds(prevIds, beforeEl, document.getElementById('ctx-before-wrap'));
+  renderIds(nextIds, afterEl,  document.getElementById('ctx-after-wrap'));
+
+  if (!prevIds.size && !nextIds.size) {
+    hint.textContent = 'Stop not found in stop_times';
+    hint.style.display = 'block';
+  }
+}
+
+// ── Context lines (configurable-depth neighbor graph) ────────────────────────
+// Draws the selected stop's stop_times neighbors out to `contextDepth` hops,
+// as directional lines — enough geographic context to eyeball whether a
+// proposed position sits roughly on the route, without pulling in a whole
+// trip's worth of stops. Each edge is oriented from the earlier stop to the
+// later one in trip order, so the arrow layer (symbol-placement: 'line')
+// always points in the travel direction — pointing into the selected stop
+// for a "previous" edge, out of it for a "next" edge.
+function clearContextLines() {
+  const src = map.getSource('context-lines');
+  if (src) src.setData({ type: 'FeatureCollection', features: [] });
+}
+
+// showStop() kicks off map.flyTo() and calls showContext() in the same tick.
+// Calling setData() on a GeoJSON source while the camera is mid-animation
+// leaves that source's tiles permanently unbuilt in MapLibre GL — the data
+// is there (queryable), but nothing ever renders. Deferring the draw to the
+// next 'moveend' (i.e. once the camera settles) avoids that; if the camera
+// isn't moving (e.g. only the depth input changed) draw immediately. The
+// token guards against a stale deferred draw (from a since-superseded flyTo)
+// overwriting a newer one if the user navigates again before moveend fires.
+function scheduleContextLines(entry, ids) {
+  const token = ++contextLinesToken;
+  const draw = () => { if (token === contextLinesToken) drawContextLines(entry, ids); };
+  if (map.isMoving()) map.once('moveend', draw);
+  else draw();
+}
+
+function onDepthChanged() {
+  const v = parseInt(document.getElementById('depth-input').value, 10);
+  contextDepth = isNaN(v) ? 0 : Math.max(0, Math.min(6, v));
+  if (filtered.length) showContext(filtered[listIdx]);
+}
+
+function drawContextLines(entry, selfIds) {
+  const src = map.getSource('context-lines');
+  if (!src) return;
+
+  if (contextDepth <= 0) {
+    src.setData({ type: 'FeatureCollection', features: [] });
+    return;
+  }
+
+  // BFS outward from the selected stop's own ids, hop by hop, collecting
+  // directional edges (from = earlier stop, to = later stop) and stopping
+  // once a node has already been visited at a shallower depth.
+  const visited = new Set(selfIds);
+  let frontier = new Set(selfIds);
+  const edgeKeys = new Set();
+  const edges = []; // {fromId, toId, depth}
+
+  for (let hop = 1; hop <= contextDepth && frontier.size; hop++) {
+    const nextFrontier = new Set();
+    for (const id of frontier) {
+      const a = stopAdj.get(id);
+      if (!a) continue;
+      a.prev.forEach(p => {
+        const key = `${p}>${id}`;
+        if (!edgeKeys.has(key)) { edgeKeys.add(key); edges.push({ fromId: p, toId: id, depth: hop }); }
+        if (!visited.has(p)) nextFrontier.add(p);
+      });
+      a.next.forEach(n => {
+        const key = `${id}>${n}`;
+        if (!edgeKeys.has(key)) { edgeKeys.add(key); edges.push({ fromId: id, toId: n, depth: hop }); }
+        if (!visited.has(n)) nextFrontier.add(n);
+      });
+    }
+    nextFrontier.forEach(id => visited.add(id));
+    frontier = nextFrontier;
+  }
+
+  const lineFeatures = [];
+  for (const { fromId, toId, depth } of edges) {
+    const fromCoord = selfIds.includes(fromId) ? [entry.lon, entry.lat] : coordFor(fromId);
+    const toCoord   = selfIds.includes(toId)   ? [entry.lon, entry.lat] : coordFor(toId);
+    if (!fromCoord || !toCoord) continue;
+    lineFeatures.push({
+      type: 'Feature',
+      properties: { depth },
+      geometry: { type: 'LineString', coordinates: [fromCoord, toCoord] },
+    });
+  }
+
+  src.setData({ type: 'FeatureCollection', features: lineFeatures });
+}
+
+function coordFor(stopId) {
+  const info = stopIdInfo[stopId];
+  if (!info || info.lat == null || info.lon == null) return null;
+  return [info.lon, info.lat];
+}
+
+// ── Map ───────────────────────────────────────────────────────────────────────
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'https://tiles.openfreemap.org/styles/liberty',
+  center: [75.7139, 15.3173],
+  zoom: 6,
+});
+map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+const marker = new maplibregl.Marker({ draggable: true, color: '#f59e0b' })
+  .setLngLat([75.7139, 15.3173]);
+
+marker.on('drag', () => {
+  const { lat, lng } = marker.getLngLat();
+  setCoordInputs(lat, lng);
+});
+
+map.on('load', () => {
+  map.addSource('context-lines', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  map.addLayer({
+    id: 'context-lines-line', type: 'line', source: 'context-lines',
+    layout: { 'line-cap': 'round' },
+    paint: {
+      'line-color': '#a78bfa',
+      'line-width':   ['match', ['get', 'depth'], 1, 2.5, 2, 1.2, 1.5],
+      'line-opacity': ['match', ['get', 'depth'], 1, 0.9, 2, 0.45, 0.6],
+    },
+  });
+  // Arrow glyph per line, auto-rotated to the line's bearing (each LineString
+  // runs from the earlier stop to the later one — see drawContextLines) so
+  // the arrow always points in the travel direction: into the selected stop
+  // for a "previous" edge, out of it for a "next" edge.
+  map.addLayer({
+    id: 'context-lines-arrows', type: 'symbol', source: 'context-lines',
+    layout: {
+      'symbol-placement': 'line',
+      'text-field': '▶',
+      // Must be an explicit, style-supported font. Without this, MapLibre
+      // falls back to a default font stack this style's glyph server 404s
+      // on — which doesn't just skip the arrows, it silently fails to build
+      // tiles for the *whole shared source*, so the line layer never
+      // renders either. (Confirmed via Playwright: same data, same layers,
+      // only difference is this line — 0 rendered without it, all rendered
+      // with it.)
+      'text-font': ['Noto Sans Regular'],
+      'text-size': ['match', ['get', 'depth'], 1, 15, 2, 11, 10],
+      'text-rotation-alignment': 'map',
+      'text-pitch-alignment': 'map',
+      'text-keep-upright': false,
+      'text-allow-overlap': true,
+      'text-ignore-placement': true,
+    },
+    paint: {
+      'text-color': '#c4b5fd',
+      'text-halo-color': '#0f1117',
+      'text-halo-width': 1,
+      'text-opacity': ['match', ['get', 'depth'], 1, 0.95, 2, 0.55, 0.7],
+    },
+  });
+
+  map.addSource('stops', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  map.addLayer({
+    id: 'stops-circle', type: 'circle', source: 'stops',
+    paint: {
+      'circle-radius': 5,
+      'circle-stroke-width': 1,
+      'circle-stroke-color': '#0f1117',
+      'circle-color': [
+        'match', ['get', 'source'],
+        'manual',   '#34d399',
+        'estimate', '#60a5fa',
+        'default',  '#f87171',
+        '#94a3b8',
+      ],
+    },
+  });
+  tryFetch();
+  tryFetchStopTimes();
+});
+
+// ── File I/O ──────────────────────────────────────────────────────────────────
+async function openFile() {
+  if ('showOpenFilePicker' in window) {
+    try {
+      const [handle] = await window.showOpenFilePicker({
+        types: [{ description: 'GeoJSON', accept: { 'application/json': ['.geojson', '.json'] } }],
+      });
+      fileHandle = handle;
+      initGeoJSON(JSON.parse(await (await handle.getFile()).text()));
+      return;
+    } catch (e) { if (e.name === 'AbortError') return; }
+  }
+  document.getElementById('file-input').click();
+}
+
+document.getElementById('file-input').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  fileHandle = null;
+  const r = new FileReader();
+  r.onload = ev => initGeoJSON(JSON.parse(ev.target.result));
+  r.readAsText(f);
+});
+
+async function tryFetch() {
+  try {
+    const resp = await fetch('./ksrtc-stops.geojson');
+    if (!resp.ok) throw new Error();
+    initGeoJSON(await resp.json());
+  } catch {
+    document.getElementById('no-data').querySelector('span').textContent =
+      'Could not auto-load — use "Open file" to select ksrtc-stops.geojson';
+  }
+}
+
+function initGeoJSON(data) {
+  geojson  = data;
+  features = data.features;
+  buildDeduped();
+  buildStopIdInfo();
+  map.getSource('stops').setData(data);
+  marker.addTo(map);
+  document.getElementById('no-data').style.display = 'none';
+  document.getElementById('editor').style.display = 'flex';
+  applyFilter();
+}
+
+async function saveToFile() {
+  if (!geojson) return;
+  const text = JSON.stringify(geojson, null, 2);
+
+  if (fileHandle) {
+    try {
+      const w = await fileHandle.createWritable();
+      await w.write(text); await w.close();
+      setStatus(`Saved → ${fileHandle.name}`); return;
+    } catch (e) { setStatus(`Write failed: ${e.message}`); }
+  }
+
+  if ('showSaveFilePicker' in window) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: 'ksrtc-stops.geojson',
+        types: [{ description: 'GeoJSON', accept: { 'application/json': ['.geojson', '.json'] } }],
+      });
+      fileHandle = handle;
+      const w = await handle.createWritable();
+      await w.write(text); await w.close();
+      setStatus(`Saved → ${handle.name}`); return;
+    } catch (e) { if (e.name === 'AbortError') return; }
+  }
+
+  const blob = new Blob([text], { type: 'application/json' });
+  const a = Object.assign(document.createElement('a'), {
+    href: URL.createObjectURL(blob), download: 'ksrtc-stops.geojson',
+  });
+  a.click(); URL.revokeObjectURL(a.href);
+  setStatus('Downloaded (open via "Open file" next time to enable direct save)');
+}
+
+// ── Filter ────────────────────────────────────────────────────────────────────
+function setFilter(chip) {
+  document.querySelectorAll('#filter-row .chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  activeFilter = chip.dataset.filter;
+  applyFilter();
+}
+
+function toggleIntable(checkbox) {
+  onlyInTable = checkbox.checked;
+  applyFilter();
+}
+
+function onSearchFilterInput(input) {
+  searchQuery = input.value.trim().toLowerCase();
+  applyFilter();
+}
+
+function applyFilter() {
+  filtered = activeFilter
+    ? allDeduped.filter(e => e.effectiveSource === activeFilter)
+    : [...allDeduped];
+  if (onlyInTable && stopAdj) {
+    filtered = filtered.filter(e => [...e.ids].some(id => stopAdj.has(id)));
+  }
+  if (searchQuery) {
+    filtered = filtered.filter(e =>
+      (e.stop_name || '').toLowerCase().includes(searchQuery) ||
+      (e.city_name || '').toLowerCase().includes(searchQuery)
+    );
+  }
+  listIdx = 0;
+  updateFilterCounts();
+  if (filtered.length) showStop(0);
+  else {
+    document.getElementById('counter').textContent = '0 / 0';
+    const parts = [];
+    if (activeFilter) parts.push(`source "${activeFilter}"`);
+    if (onlyInTable)  parts.push('in stop_times');
+    if (searchQuery)  parts.push(`matching "${searchQuery}"`);
+    setStatus(parts.length ? `No stops match ${parts.join(' + ')}` : 'No stops loaded');
+  }
+}
+
+function updateFilterCounts() {
+  const counts = { estimate: 0, default: 0, manual: 0 };
+  allDeduped.forEach(e => { const s = e.effectiveSource; if (s in counts) counts[s]++; });
+  document.querySelector('[data-filter="estimate"]').textContent = `Estimate (${counts.estimate})`;
+  document.querySelector('[data-filter="default"]').textContent  = `Default (${counts.default})`;
+  document.querySelector('[data-filter="manual"]').textContent   = `Manual (${counts.manual})`;
+  document.querySelector('[data-filter=""]').textContent         = `All (${allDeduped.length})`;
+
+  const label = document.getElementById('toggle-intable-label');
+  if (stopAdj) {
+    const n = allDeduped.filter(e => [...e.ids].some(id => stopAdj.has(id))).length;
+    label.textContent = `Only in stop_times (${n})`;
+  } else {
+    label.textContent = 'Only in stop_times';
+  }
+}
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function showStop(i) {
+  listIdx = (i + filtered.length) % filtered.length;
+  const e = filtered[listIdx];
+  const { lat, lon, stop_name, city_name, effectiveSource, coordSource } = e;
+
+  document.getElementById('counter').textContent   = `${listIdx + 1} / ${filtered.length}`;
+  document.getElementById('stop-name').textContent = stop_name || '(unnamed)';
+  document.getElementById('city-name').textContent = city_name || '';
+  setSourceBadge(effectiveSource || 'unknown');
+
+  document.getElementById('search-input').value =
+    `${stop_name || ''}, ${city_name || ''}, Karnataka, India`;
+  document.getElementById('search-results').innerHTML = '';
+
+  // Show notice when displayed coords come from a better (manual) source than the worst in the group
+  const matchNotice = document.getElementById('match-notice');
+  matchNotice.style.display =
+    (effectiveSource !== 'manual' && coordSource === 'manual') ? 'block' : 'none';
+
+  setCoordInputs(lat, lon);
+  marker.setLngLat([lon, lat]);
+  map.flyTo({ center: [lon, lat], zoom: Math.max(map.getZoom(), 13), duration: 350 });
+
+  setStatus(`${stop_name}  ·  ${city_name}`);
+  showContext(e);
+}
+
+function prev() { if (filtered.length) showStop(listIdx - 1); }
+function next() { if (filtered.length) showStop(listIdx + 1); }
+
+// ── Coordinates ───────────────────────────────────────────────────────────────
+function setCoordInputs(lat, lon) {
+  document.getElementById('lat-input').value = lat.toFixed(6);
+  document.getElementById('lon-input').value = lon.toFixed(6);
+}
+
+function onCoordsTyped() {
+  const lat = parseFloat(document.getElementById('lat-input').value);
+  const lon = parseFloat(document.getElementById('lon-input').value);
+  if (isNaN(lat) || isNaN(lon)) return;
+  marker.setLngLat([lon, lat]);
+  map.easeTo({ center: [lon, lat], duration: 200 });
+}
+
+// ── Source badge ──────────────────────────────────────────────────────────────
+function setSourceBadge(source) {
+  const el = document.getElementById('source-badge');
+  el.textContent = source;
+  el.className = `badge badge-${source}`;
+}
+
+// ── Nominatim ─────────────────────────────────────────────────────────────────
+async function doSearch() {
+  const q = document.getElementById('search-input').value.trim();
+  if (!q) return;
+  const btn = document.getElementById('search-btn');
+  btn.disabled = true; btn.textContent = '…';
+  const box = document.getElementById('search-results');
+  box.innerHTML = '';
+
+  try {
+    const resp = await fetch(
+      `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=5&countrycodes=in`,
+      { headers: { 'Accept-Language': 'en', 'User-Agent': 'ksrtc-stop-editor/1.0' } }
+    );
+    const results = await resp.json();
+    if (!results.length) {
+      box.innerHTML = '<div class="result-item" style="cursor:default;color:#475569">No results</div>';
+      return;
+    }
+    box.innerHTML = results.map(r =>
+      `<div class="result-item" onclick="pickResult(${r.lat},${r.lon})">${r.display_name}</div>`
+    ).join('');
+  } catch {
+    box.innerHTML = '<div class="result-item" style="cursor:default;color:#f87171">Search failed</div>';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Search';
+  }
+}
+
+function pickResult(lat, lon) {
+  lat = parseFloat(lat); lon = parseFloat(lon);
+  setCoordInputs(lat, lon);
+  marker.setLngLat([lon, lat]);
+  map.flyTo({ center: [lon, lat], zoom: 15, duration: 500 });
+  document.getElementById('search-results').innerHTML = '';
+  setStatus('Location picked — press S or "Save stop" to commit');
+}
+
+document.getElementById('search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+// ── Save stop ─────────────────────────────────────────────────────────────────
+function saveStop() {
+  if (!filtered.length) return;
+  const lat = parseFloat(document.getElementById('lat-input').value);
+  const lon = parseFloat(document.getElementById('lon-input').value);
+  if (isNaN(lat) || isNaN(lon)) return;
+
+  const entry = filtered[listIdx];
+  const key = entry.key;
+
+  // Update ALL raw features with the same stop_name+city_name
+  for (const f of features) {
+    if (stopKey(f.properties.stop_name, f.properties.city_name) === key) {
+      f.geometry.coordinates = [lon, lat];
+      f.properties.source = 'manual';
+    }
+  }
+
+  // Rebuild deduplication index and re-filter. buildStopIdInfo() must also
+  // run here — it backs coordFor() in drawContextLines, so if the stop just
+  // saved is a stop_times neighbor of some OTHER stop, that other stop's
+  // context lines would otherwise keep pointing at the pre-edit position
+  // until stopIdInfo happens to get rebuilt some other way (e.g. a reload).
+  buildDeduped();
+  buildStopIdInfo();
+  const prevSourceWasNonManual = activeFilter && activeFilter !== 'manual';
+  applyFilter();
+
+  // Restore position: if this entry is still in filtered, navigate to it; otherwise stay at index
+  if (!prevSourceWasNonManual) {
+    const newIdx = filtered.findIndex(e => e.key === key);
+    if (newIdx !== -1) { listIdx = newIdx; showStop(newIdx); }
+  }
+
+  // Refresh map layer
+  map.getSource('stops').setData(geojson);
+
+  setStatus(`Saved: ${entry.stop_name} → ${lat.toFixed(5)}, ${lon.toFixed(5)}`);
+}
+
+// ── Keyboard ──────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.key === 'ArrowLeft')          prev();
+  if (e.key === 'ArrowRight')         next();
+  if (e.key === 's' || e.key === 'S') saveStop();
+});
+
+// ── Status ────────────────────────────────────────────────────────────────────
+function setStatus(msg) { document.getElementById('status-bar').textContent = msg; }
+</script>
+</body>
+</html>

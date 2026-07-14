@@ -1,0 +1,37 @@
+{
+  "_comment": "services: raw API ServiceType string -> slug. Two ServiceType strings that share a slug are treated as the SAME service by gtfs_parallel.py (e.g. 'NON AC SLEEPER' and 'PALLAKKI (NON AC SLEEPER)' are just different branding for the same product, so both map to slug PALLAKKI). labels: slug -> human-readable name used in route long_name. A ServiceType not listed here falls back to an auto-generated slug/label at runtime (see _service_slug in gtfs_parallel.py) — add it here once reviewed.",
+  "services": {
+    "KARNATAKA SARIGE": "SARIGE",
+    "NON AC SLEEPER": "PALLAKKI",
+    "PALLAKKI (NON AC SLEEPER)": "PALLAKKI",
+    "AC SLEEPER": "AMBAARI",
+    "AIRAVAT": "AIRAVAT",
+    "AIRAVAT CLUB CLASS": "AIRAVAT_CLUB",
+    "AIRAVAT CLUB CLASS 2.0": "AIRAVAT_CLUB",
+    "AIRAVAT GOLD CLASS": "AIRAVAT_GOLD",
+    "RAJAHAMSA EXECUTIVE": "RAJAHAMSA",
+    "ASHWAMEDHA (POINT TO POINT EXPRESS)": "ASHWAMEDHA",
+    "AMBAARI UTSAV (AC SLEEPER)": "AMBAARI",
+    "AMBAARI DREAM CLASS (AC SLEEPER)": "AMBAARI",
+    "AMOGHAVARSHA (NON AC SLEEPER)": "AMOGHAVARSHA",
+    "KALYANA RATHA (AC SLEEPER)": "KALYANARATHA",
+    "FLYBUS": "FLYBUS",
+    "EV POWER PLUS": "EV_POWER_PLUS",
+    "BMTC VOLVO": "BMTC_VOLVO"
+  },
+  "labels": {
+    "SARIGE": "Karnataka Sarige",
+    "PALLAKKI": "Pallakki",
+    "AMBAARI": "Ambaari",
+    "AIRAVAT": "Airavat",
+    "AIRAVAT_CLUB": "Airavat Club",
+    "AIRAVAT_GOLD": "Airavat Gold",
+    "RAJAHAMSA": "Rajahamsa",
+    "ASHWAMEDHA": "Ashwamedha",
+    "AMOGHAVARSHA": "Amoghavarsha",
+    "KALYANARATHA": "Kalyana Ratha",
+    "FLYBUS": "Flybus",
+    "EV_POWER_PLUS": "EV Power Plus",
+    "BMTC_VOLVO": "BMTC Volvo"
+  }
+}

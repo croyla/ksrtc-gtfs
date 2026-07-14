@@ -1,0 +1,6 @@
+/gtfs/
+/.idea/
+/tmp/
+*.log
+.env
+summary.txt
