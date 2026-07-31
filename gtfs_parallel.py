@@ -15,6 +15,8 @@ import time
 import random
 import re
 import math
+import subprocess
+import shutil
 
 # ── CLI args ──────────────────────────────────────────────────────────────────
 
@@ -60,6 +62,9 @@ parser.add_argument('--max-expansion-rounds', type=int, default=3,
 parser.add_argument('--no-city-name-dedup', action='store_true',
                      help='Disable reusing a city centre across different city_ids that share the '
                           'same name (default: enabled — skips a redundant Overpass city lookup)')
+parser.add_argument('--skip-shapes', action='store_true',
+                     help='Skip shapes.txt generation via pfaedle (default: enabled — builds pfaedle '
+                          'from source and downloads OSM extracts on first run, which can take a while)')
 
 args = parser.parse_args()
 
@@ -970,6 +975,46 @@ def load_seed_pairs(path: str) -> list[tuple[int, int]]:
     return list(pairs)
 
 
+def append_new_pairs_to_seed_file(path: str, new_pairs: set[tuple[int, int]], cities: dict[int, str]):
+    """Append newly-discovered active pairs (found via Phase 2b.5 reachable×reachable
+    expansion, not present in the original seed file) to search-pairs.json, so future
+    runs seed Phase 2b directly from them instead of having to rediscover them via
+    expansion every time. Re-reads the file fresh (rather than reusing the in-memory
+    copy from load_seed_pairs) so concurrent edits to the file aren't clobbered."""
+    try:
+        with open(path) as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        logger.warning(f"Could not update {path} with newly discovered pairs: {e}")
+        return
+
+    existing = {(e["from_city_id"], e["to_city_id"]) for e in data.get("pairs", [])}
+    added = 0
+    for from_id, to_id in sorted(new_pairs):
+        if (from_id, to_id) in existing:
+            continue
+        name_from = cities.get(from_id, str(from_id))
+        name_to = cities.get(to_id, str(to_id))
+        data.setdefault("pairs", []).append({
+            "from_city_id": from_id,
+            "to_city_id": to_id,
+            "from_name": name_from,
+            "to_name": name_to,
+            "from_matched_name": name_from,
+            "to_matched_name": name_to,
+            "from_match_method": "ksrtc-discovered",
+            "to_match_method": "ksrtc-discovered",
+        })
+        existing.add((from_id, to_id))
+        added += 1
+
+    if added:
+        data["matched_count"] = len(data.get("pairs", []))
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2)
+        logger.info(f"Appended {added} newly discovered pair(s) to {path}")
+
+
 city_ids = list(all_cities.keys())
 base_pairs = load_seed_pairs(SEARCH_PAIRS_PATH)
 probed_pairs: set[tuple[int, int]] = set(base_pairs)
@@ -1085,6 +1130,18 @@ cover_pairs = [p for p in active_pairs if not _is_dominated(p)]
 logger.info(f"Phase 2c prep: {len(active_pairs)} active pairs → {len(cover_pairs)} after dropping "
             f"{len(active_pairs) - len(cover_pairs)} pair(s) subsumed by another pair's trips")
 
+# search-pairs.json is treated as an accumulating record of known-real KSRTC
+# pairs (scraped from abhibus, or appended below from a previous run's own
+# Phase 2b.5 discoveries) -- so a seed pair that came back empty across the
+# whole Phase 2b/2b.5 probe window (e.g. a weekly service whose running day
+# fell outside PROBE_DATE_WINDOW) still deserves the full remaining-date
+# sweep, rather than being dropped for having shown no service today.
+_before_seed_union = len(cover_pairs)
+cover_pairs = list(set(cover_pairs) | set(base_pairs))
+if len(cover_pairs) > _before_seed_union:
+    logger.info(f"Phase 2c prep: added {len(cover_pairs) - _before_seed_union} seed pair(s) from "
+                f"{SEARCH_PAIRS_PATH} with no confirmed probe activity to the full date sweep")
+
 # ── Phase 2c: query surviving pairs across remaining service dates ───────────
 remaining_dates = service_dates[1:]
 if remaining_dates and cover_pairs:
@@ -1103,6 +1160,15 @@ if remaining_dates and cover_pairs:
         concurrent.futures.wait(futures)
 
 logger.info(f"Phase 2 complete: {len(discovered_trips)} unique trips across {len(service_dates)} dates")
+
+# Feed pairs discovered this run (via Phase 2b.5 expansion) but absent from the
+# original seed file back into search-pairs.json, so next run's Phase 2b seeds
+# from them directly and -- combined with the unconditional seed union above
+# -- they still get the full date-range sweep on a run where they don't show
+# up during the probe window.
+new_pairs = set(active_pairs) - set(base_pairs)
+if new_pairs:
+    append_new_pairs_to_seed_file(SEARCH_PAIRS_PATH, new_pairs, all_cities)
 
 # ── Phase 3: fetch stop sequences per trip ────────────────────────────────────
 
@@ -1467,6 +1533,255 @@ with open(f"{OUTPUT_DIR}/feed_info.txt", "w") as f:
         "feed_publisher_name,feed_publisher_url,feed_lang,feed_start_date,feed_end_date,feed_contact_url\n"
         f"BLRTransit,https://blrtransit.com,en,{start_date},{end_date},https://blrtransit.com\n"
     )
+
+# ── Phase 6: shape generation via pfaedle ───────────────────────────────────
+#
+# pfaedle (https://github.com/ad-freiburg/pfaedle) map-matches each trip's
+# station-to-station path against an OSM road network to produce shapes.txt.
+# It has no Homebrew formula, so we build it from source into .pfaedle/ (git-
+# ignored) on first run. It also needs an OSM extract covering the trips'
+# stops; we auto-select and download only the Geofabrik India zone(s) that
+# actually contain a stop, cached under .osm_cache/ (also gitignored).
+
+PFAEDLE_DIR = os.path.abspath(".pfaedle")
+PFAEDLE_REPO_DIR = os.path.join(PFAEDLE_DIR, "src")
+PFAEDLE_BUILD_DIR = os.path.join(PFAEDLE_REPO_DIR, "build")
+PFAEDLE_BIN = os.path.join(PFAEDLE_BUILD_DIR, "pfaedle")
+PFAEDLE_CFG = os.path.join(PFAEDLE_REPO_DIR, "pfaedle.cfg")
+OSM_CACHE_DIR = os.path.abspath(".osm_cache")
+GEOFABRIK_BASE = "https://download.geofabrik.de/asia/india"
+GEOFABRIK_ZONES = [
+    "southern-zone", "western-zone", "central-zone",
+    "eastern-zone", "northern-zone", "north-eastern-zone",
+]
+
+
+def ensure_pfaedle_built() -> str | None:
+    if os.path.isfile(PFAEDLE_BIN) and os.access(PFAEDLE_BIN, os.X_OK):
+        return PFAEDLE_BIN
+    logger.info("pfaedle binary not found — cloning and building from source "
+                "(this can take a few minutes on first run)...")
+    os.makedirs(PFAEDLE_DIR, exist_ok=True)
+    try:
+        if not os.path.isdir(os.path.join(PFAEDLE_REPO_DIR, ".git")):
+            subprocess.run(
+                ["git", "clone", "--recurse-submodules",
+                 "https://github.com/ad-freiburg/pfaedle", PFAEDLE_REPO_DIR],
+                check=True,
+            )
+        os.makedirs(PFAEDLE_BUILD_DIR, exist_ok=True)
+        subprocess.run(["cmake", ".."], cwd=PFAEDLE_BUILD_DIR, check=True)
+        subprocess.run(["make", "-j"], cwd=PFAEDLE_BUILD_DIR, check=True)
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        logger.error(f"Failed to build pfaedle ({e}); skipping shape generation")
+        return None
+    if not os.path.isfile(PFAEDLE_BIN):
+        logger.error("pfaedle build finished but binary is missing; skipping shape generation")
+        return None
+    return PFAEDLE_BIN
+
+
+def _parse_poly(text: str) -> list[list[tuple[float, float]]]:
+    """Parse an Osmosis .poly file into a list of (lon, lat) rings."""
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    rings: list[list[tuple[float, float]]] = []
+    cur: list[tuple[float, float]] | None = None
+    for line in lines[1:]:  # line 0 is the polygon file's name, skip it
+        if line == "END":
+            if cur is not None:
+                rings.append(cur)
+                cur = None
+            continue
+        parts = line.split()
+        if cur is None and len(parts) == 1:
+            cur = []
+            continue
+        if cur is not None and len(parts) >= 2:
+            lon, lat = float(parts[0]), float(parts[1])
+            cur.append((lon, lat))
+    return rings
+
+
+def _point_in_rings(lon: float, lat: float, rings: list[list[tuple[float, float]]]) -> bool:
+    """Even-odd ray-casting test summed over all rings (correctly handles holes)."""
+    inside = False
+    for ring in rings:
+        n = len(ring)
+        for i in range(n):
+            x1, y1 = ring[i]
+            x2, y2 = ring[(i + 1) % n]
+            if (y1 > lat) != (y2 > lat):
+                x_int = x1 + (lat - y1) * (x2 - x1) / (y2 - y1)
+                if lon < x_int:
+                    inside = not inside
+    return inside
+
+
+def zones_covering_stops(stop_points: list[tuple[float, float]]) -> list[str]:
+    os.makedirs(OSM_CACHE_DIR, exist_ok=True)
+    needed = []
+    for zone in GEOFABRIK_ZONES:
+        poly_path = os.path.join(OSM_CACHE_DIR, f"{zone}.poly")
+        if not os.path.isfile(poly_path):
+            resp = requests.get(f"{GEOFABRIK_BASE}/{zone}.poly", timeout=30)
+            resp.raise_for_status()
+            with open(poly_path, "w") as f:
+                f.write(resp.text)
+        rings = _parse_poly(open(poly_path).read())
+        if any(_point_in_rings(lon, lat, rings) for lon, lat in stop_points):
+            needed.append(zone)
+    return needed
+
+
+def download_zone_pbf(zone: str) -> str:
+    dest = os.path.join(OSM_CACHE_DIR, f"{zone}.osm.pbf")
+    if os.path.isfile(dest) and os.path.getsize(dest) > 0:
+        return dest
+    url = f"{GEOFABRIK_BASE}/{zone}-latest.osm.pbf"
+    logger.info(f"Downloading OSM extract for {zone} (this may take a while)...")
+    tmp = dest + ".part"
+    with requests.get(url, stream=True, timeout=600) as r:
+        r.raise_for_status()
+        with open(tmp, "wb") as f:
+            for chunk in r.iter_content(chunk_size=1 << 20):
+                f.write(chunk)
+    os.replace(tmp, dest)
+    return dest
+
+
+def merge_zone_pbfs(zones: list[str], pbf_paths: list[str]) -> str | None:
+    """Merge multiple zone .osm.pbf files into one via `osmium merge`, so
+    pfaedle can map-match cross-zone (interstate) trips in a single run.
+    Returns the merged PBF path, or None if osmium-tool isn't available."""
+    if shutil.which("osmium") is None:
+        return None
+    merged_path = os.path.join(OSM_CACHE_DIR, f"merged-{'-'.join(sorted(zones))}.osm.pbf")
+    if os.path.isfile(merged_path) and os.path.getsize(merged_path) > 0:
+        return merged_path
+    logger.info(f"Merging OSM zones via osmium: {', '.join(zones)}...")
+    tmp = merged_path + ".part"
+    cmd = ["osmium", "merge", *pbf_paths, "-o", tmp, "-f", "pbf", "--overwrite"]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        logger.error(f"osmium merge failed: {result.stderr[-2000:]}")
+        if os.path.isfile(tmp):
+            os.remove(tmp)
+        return None
+    os.replace(tmp, merged_path)
+    return merged_path
+
+
+def run_pfaedle(pfaedle_bin: str, osm_pbf: str, gtfs_zip: str, out_dir: str) -> bool:
+    os.makedirs(out_dir, exist_ok=True)
+    cmd = [pfaedle_bin, "-x", osm_pbf, "-m", "bus", "-c", PFAEDLE_CFG, gtfs_zip]
+    logger.info(f"Running pfaedle against {os.path.basename(osm_pbf)}...")
+    result = subprocess.run(cmd, cwd=out_dir, capture_output=True, text=True)
+    if result.returncode != 0:
+        logger.error(f"pfaedle failed for {osm_pbf}: {result.stderr[-2000:]}")
+        return False
+    return True
+
+
+def merge_shapes_into_output(zone_out_dirs: list[str]):
+    """Merge shapes.txt / trips.txt shape_id from one or more pfaedle gtfs-out
+    dirs into OUTPUT_DIR, preferring the first zone that matched each trip."""
+    trip_shape_id: dict[str, str] = {}
+    shape_groups: dict[str, pd.DataFrame] = {}
+    for out_dir in zone_out_dirs:
+        gtfs_out = os.path.join(out_dir, "gtfs-out")
+        shapes_path = os.path.join(gtfs_out, "shapes.txt")
+        trips_path = os.path.join(gtfs_out, "trips.txt")
+        if not os.path.isfile(shapes_path) or not os.path.isfile(trips_path):
+            continue
+        trips_df = pd.read_csv(trips_path, dtype=str)
+        if "shape_id" not in trips_df.columns:
+            continue
+        for _, row in trips_df.iterrows():
+            tid, sid = row["trip_id"], row.get("shape_id")
+            if tid not in trip_shape_id and isinstance(sid, str) and sid:
+                trip_shape_id[tid] = sid
+        shapes_df = pd.read_csv(shapes_path, dtype=str)
+        for sid, group in shapes_df.groupby("shape_id"):
+            shape_groups.setdefault(sid, group)
+
+    if not trip_shape_id:
+        logger.warning("pfaedle produced no shapes; leaving GTFS feed without shapes.txt")
+        return
+
+    used_shape_ids = set(trip_shape_id.values())
+    shapes_out = pd.concat(
+        [shape_groups[sid] for sid in used_shape_ids if sid in shape_groups], ignore_index=True
+    )
+    shapes_out.to_csv(f"{OUTPUT_DIR}/shapes.txt", index=False)
+
+    trips_df = pd.read_csv(f"{OUTPUT_DIR}/trips.txt", dtype=str)
+    trips_df["shape_id"] = trips_df["trip_id"].map(trip_shape_id).fillna("")
+    trips_df.to_csv(f"{OUTPUT_DIR}/trips.txt", index=False)
+
+    n_matched = sum(1 for v in trip_shape_id.values() if v)
+    logger.info(f"pfaedle matched shapes for {n_matched}/{len(trips_df)} trips "
+                f"across {len(zone_out_dirs)} OSM zone(s)")
+
+
+if args.skip_shapes:
+    logger.info("Skipping shape generation (--skip-shapes)")
+else:
+    with open(f"{OUTPUT_DIR}/attribution.txt", "w") as f:
+        f.write(
+            "attribution_id,organization_name,attribution_url,is_producer,is_operator,is_authority\n"
+            f"osm,OpenStreetMap Contributors,en,https://openstreetmap.org,,,\n"
+        )
+    stop_points = [(float(r[3]), float(r[2])) for r in stops_rows[1:]]  # (lon, lat)
+    needed_zones = zones_covering_stops(stop_points) if stop_points else []
+    if not needed_zones:
+        logger.warning("No stops matched any Geofabrik India zone; skipping shape generation")
+    else:
+        logger.info(f"Stops span OSM zone(s): {', '.join(needed_zones)}")
+        pfaedle_bin = ensure_pfaedle_built()
+        if pfaedle_bin is None:
+            logger.warning("pfaedle unavailable; continuing without shapes.txt")
+        else:
+            # pfaedle needs a zip to read from — write one now and replace it
+            # with the final archive (including shapes.txt) further below.
+            tmp_zip_path = os.path.join(PFAEDLE_DIR, "pre-shapes.zip")
+            with zipfile.ZipFile(tmp_zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+                for fname in os.listdir(OUTPUT_DIR):
+                    if fname == ".DS_Store":
+                        continue
+                    zipf.write(os.path.join(OUTPUT_DIR, fname), arcname=fname)
+
+            pbf_paths = {}
+            for zone in needed_zones:
+                try:
+                    pbf_paths[zone] = download_zone_pbf(zone)
+                except requests.RequestException as e:
+                    logger.error(f"Failed to download OSM extract for {zone}: {e}")
+
+            zone_out_dirs = []
+            if len(pbf_paths) > 1:
+                merged_pbf = merge_zone_pbfs(list(pbf_paths.keys()), list(pbf_paths.values()))
+                if merged_pbf is not None:
+                    out_dir = os.path.join(PFAEDLE_DIR, "out", "merged")
+                    if run_pfaedle(pfaedle_bin, merged_pbf, tmp_zip_path, out_dir):
+                        zone_out_dirs.append(out_dir)
+                else:
+                    logger.warning(
+                        "osmium-tool not found; running pfaedle once per zone instead of "
+                        "merging. Cross-zone (interstate) trips may get incomplete shapes "
+                        "since each run only sees roads within its own zone — "
+                        "`brew install osmium-tool` to enable automatic merging."
+                    )
+
+            if not zone_out_dirs:
+                for zone, pbf_path in pbf_paths.items():
+                    out_dir = os.path.join(PFAEDLE_DIR, "out", zone)
+                    if run_pfaedle(pfaedle_bin, pbf_path, tmp_zip_path, out_dir):
+                        zone_out_dirs.append(out_dir)
+
+            if zone_out_dirs:
+                merge_shapes_into_output(zone_out_dirs)
+            else:
+                logger.warning("All pfaedle runs failed; continuing without shapes.txt")
 
 # ── Zip ───────────────────────────────────────────────────────────────────────
 

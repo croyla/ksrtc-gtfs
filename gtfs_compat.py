@@ -74,6 +74,7 @@ try:
     agency_df = pd.read_csv(f"{TEMP_EXTRACT_DIR}/agency.txt") if os.path.exists(f"{TEMP_EXTRACT_DIR}/agency.txt") else None
     calendar_df = pd.read_csv(f"{TEMP_EXTRACT_DIR}/calendar.txt") if os.path.exists(f"{TEMP_EXTRACT_DIR}/calendar.txt") else None
     feed_info_df = pd.read_csv(f"{TEMP_EXTRACT_DIR}/feed_info.txt") if os.path.exists(f"{TEMP_EXTRACT_DIR}/feed_info.txt") else None
+    shapes_df = pd.read_csv(f"{TEMP_EXTRACT_DIR}/shapes.txt") if os.path.exists(f"{TEMP_EXTRACT_DIR}/shapes.txt") else None
 
     logger.info(f"Read {len(routes_df)} routes, {len(trips_df)} trips, {len(stop_times_df)} stop times, {len(stops_df)} stops")
 except Exception as e:
@@ -213,6 +214,8 @@ try:
         calendar_df.to_csv(f"{OUTPUT_DIR}/calendar.txt", index=False)
     if feed_info_df is not None:
         feed_info_df.to_csv(f"{OUTPUT_DIR}/feed_info.txt", index=False)
+    if shapes_df is not None:
+        shapes_df.to_csv(f"{OUTPUT_DIR}/shapes.txt", index=False)
 
     logger.info("Saved all transformed GTFS files")
 except Exception as e:

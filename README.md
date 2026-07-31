@@ -22,11 +22,26 @@ This tool connects to the KSRTC website to retrieve bus route information, stops
 - Detailed logging to both console and file
 - Support for midnight-crossing trips
 - Configurable via command-line arguments
+- `shapes.txt` generation via [pfaedle](https://github.com/ad-freiburg/pfaedle) map-matching
 
 ## Prerequisites
 
 - Python 3.13+
 - poetry (Python package manager)
+- `git`, `cmake`, and a C++ compiler (gcc ≥5.0 or clang ≥3.9) — needed the first time pfaedle
+  is built from source into `.pfaedle/` (gitignored); skip with `--skip-shapes` if you don't
+  need shapes or don't have a compiler toolchain available
+- `libzip` — required for pfaedle to read/write GTFS `.zip` feeds; without it pfaedle builds
+  successfully but fails at runtime with `Cannot read from ZIP file, was compiled without libzip`
+- `osmium-tool` (optional) — lets the script auto-merge OSM extracts when stops span multiple
+  Geofabrik zones, so pfaedle can map-match cross-zone (interstate) trips in one pass; without
+  it, the script falls back to running pfaedle once per zone and merging results per-trip
+
+Install these on macOS via Homebrew:
+
+```bash
+brew install libzip osmium-tool
+```
 
 ## Installation
 
@@ -54,10 +69,16 @@ The script will:
 1. Fetch all routes from the KSRTC website
 2. Process route details in parallel (default: 10 concurrent workers)
 3. Generate GTFS-compliant text files in the `gtfs/` directory
-4. Create a compressed `gtfs.zip` archive
-5. Log all operations to `latest.log` and console
-6. Create ksrtc-stops.geojson and ksrtc-services.json
+4. Build pfaedle from source on first run (cached in `.pfaedle/`), auto-download the
+   Geofabrik OSM extract(s) covering the feed's stops (cached in `.osm_cache/`), and
+   map-match trips to produce `shapes.txt` — pass `--skip-shapes` to disable this
+5. Create a compressed `gtfs.zip` archive
+6. Log all operations to `latest.log` and console
+7. Create ksrtc-stops.geojson and ksrtc-services.json
 _KSRTC does not give us geographic information on stops, this is stored in ksrtc-stops.geojson_
+
+Shape data is derived from OpenStreetMap (ODbL 1.0) — credit OpenStreetMap contributors
+if you distribute the shaped feed.
 
 ### Command Line Options
 
@@ -141,7 +162,7 @@ To contribute to this project:
 
 ## License
 
-MIT-0
+MIT-0, Shapes are generated with OSM data, requiring OSM attribution.
 
 ## Contact
 

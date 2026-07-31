@@ -5752,8 +5752,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          74.7436381,
-          13.4336923
+          74.7716,
+          13.51145
         ]
       },
       "properties": {
@@ -5761,7 +5761,7 @@
         "stop_name": "SAHEBRAKATTE",
         "city_name": "BRAHMAVARA",
         "city_id": 2008,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -5769,8 +5769,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          74.7436381,
-          13.4336923
+          74.817875,
+          13.578593
         ]
       },
       "properties": {
@@ -5778,7 +5778,7 @@
         "stop_name": "BIDKALKATTE",
         "city_name": "BRAHMAVARA",
         "city_id": 2008,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -8625,8 +8625,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          76.388002,
+          14.905036
         ]
       },
       "properties": {
@@ -8634,7 +8634,7 @@
         "stop_name": "KUDLAGI",
         "city_name": "KUDLAGI",
         "city_id": 1575,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -13997,8 +13997,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          74.89419,
-          14.345475
+          74.893896,
+          14.345421
         ]
       },
       "properties": {
@@ -14006,7 +14006,7 @@
         "stop_name": "SV TRAVELS VIJAYA BANK OPP",
         "city_name": "SIDDAPURSRS",
         "city_id": 1098,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -14150,8 +14150,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7129552,
-          14.8404105
+          75.713535,
+          14.841437
         ]
       },
       "properties": {
@@ -14159,7 +14159,7 @@
         "stop_name": "HOLALU",
         "city_name": "HOLALU",
         "city_id": 820,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -14176,7 +14176,7 @@
         "stop_name": "HARUGERI",
         "city_name": "HARUGERI",
         "city_id": 73,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -14703,7 +14703,7 @@
         "stop_name": "KONDALHALLY",
         "city_name": "KONDALHALLY",
         "city_id": 1567,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -15102,8 +15102,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          72.822145,
-          18.969314
+          72.822122,
+          18.969318
         ]
       },
       "properties": {
@@ -15111,7 +15111,7 @@
         "stop_name": "MUMBAI",
         "city_name": "MUMBAI",
         "city_id": 2898,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -15986,8 +15986,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.995755,
+          16.748038
         ]
       },
       "properties": {
@@ -15995,7 +15995,7 @@
         "stop_name": "MEHABOOBNAGAR",
         "city_name": "MEHABOOBNAGAR",
         "city_id": 210,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -16105,8 +16105,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          75.781541,
+          12.941246
         ]
       },
       "properties": {
@@ -16114,7 +16114,7 @@
         "stop_name": "SAKALESHPUR",
         "city_name": "SAKALESHPUR",
         "city_id": 1292,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -16292,8 +16292,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          74.841706,
-          12.885278
+          74.965359,
+          12.801677
         ]
       },
       "properties": {
@@ -16301,7 +16301,7 @@
         "stop_name": "A B DENTAL COLLEGE",
         "city_name": "MANGALURU",
         "city_id": 30,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -18672,8 +18672,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          78.293121,
-          17.493418
+          78.293073,
+          17.493405
         ]
       },
       "properties": {
@@ -18681,7 +18681,7 @@
         "stop_name": "BHEL",
         "city_name": "BHEL",
         "city_id": 21,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -19990,7 +19990,7 @@
         "stop_name": "NARASIMHARAJAPURA BUS STAND",
         "city_name": "NARASIMHARAJA PURA",
         "city_id": 534,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20007,7 +20007,7 @@
         "stop_name": "LAKKAVALLY BUS STAND",
         "city_name": "LAKKAVALLY",
         "city_id": 2516,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20024,7 +20024,7 @@
         "stop_name": "TRASI BUS STAND",
         "city_name": "TRASI",
         "city_id": 4901,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20041,7 +20041,7 @@
         "stop_name": "KAMALAPUR BUS STAND",
         "city_name": "KAMALAPUR",
         "city_id": 1976,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20049,8 +20049,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.964462,
-          15.732203
+          75.964259,
+          15.730364
         ]
       },
       "properties": {
@@ -20058,7 +20058,7 @@
         "stop_name": "GAJENDRAGADA BUS STAND",
         "city_name": "GAJENDRAGADA",
         "city_id": 2794,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20075,7 +20075,7 @@
         "stop_name": "BISLE BUS STOP",
         "city_name": "BISLE",
         "city_id": 2059,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20092,7 +20092,7 @@
         "stop_name": "GINAGERA BUS STAND",
         "city_name": "GINAGERA",
         "city_id": 3167,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20109,7 +20109,7 @@
         "stop_name": "TALGUPPA BUS STAND",
         "city_name": "TALGUPPA",
         "city_id": 1845,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20126,7 +20126,7 @@
         "stop_name": "MASTHIKATTE BUS STAND",
         "city_name": "MASTHIKATTE",
         "city_id": 163,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20143,7 +20143,7 @@
         "stop_name": "KANEYUR BUS STAND",
         "city_name": "KANEYUR",
         "city_id": 2487,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20160,7 +20160,7 @@
         "stop_name": "NINTHIKALLU BUS STAND",
         "city_name": "NINTHIKALLU",
         "city_id": 543,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20177,7 +20177,7 @@
         "stop_name": "KADABA BUS STAND",
         "city_name": "KADABA",
         "city_id": 1557,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20194,7 +20194,7 @@
         "stop_name": "GUTTAL BUS STAND",
         "city_name": "GUTTAL",
         "city_id": 3223,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -20211,7 +20211,1928 @@
         "stop_name": "GUTTIGAR BUS STAND",
         "city_name": "GUTTIGAR",
         "city_id": 2882,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.944243,
+          12.14588
+        ]
+      },
+      "properties": {
+        "stop_id": "C746-ponnampet",
+        "stop_name": "PONNAMPET",
+        "city_name": "PONNAMPET",
+        "city_id": 746,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.104683,
+          12.998113
+        ]
+      },
+      "properties": {
+        "stop_id": "C574-hassan",
+        "stop_name": "HASSAN",
+        "city_name": "HASSAN",
+        "city_id": 574,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.866339,
+          13.165772
+        ]
+      },
+      "properties": {
+        "stop_id": "C1425-belur",
+        "stop_name": "BELUR",
+        "city_name": "BELUR",
+        "city_id": 1425,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.845112,
+          16.70566
+        ]
+      },
+      "properties": {
+        "stop_id": "C1210-shahapura-bus-stand",
+        "stop_name": "SHAHAPURA BUS STAND",
+        "city_name": "SHAHAPUR",
+        "city_id": 1210,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.527125,
+          16.15669
+        ]
+      },
+      "properties": {
+        "stop_id": "C2502-lingasugur-bus-stand",
+        "stop_name": "LINGASUGUR BUS STAND",
+        "city_name": "LINGASUGUR",
+        "city_id": 2502,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.757077,
+          16.525712
+        ]
+      },
+      "properties": {
+        "stop_id": "C1499-surapura-bus-stand",
+        "stop_name": "SURAPURA BUS STAND",
+        "city_name": "SURAPURA",
+        "city_id": 1499,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.332385,
+          14.972054
+        ]
+      },
+      "properties": {
+        "stop_id": "C1381-savanur-bus-stand",
+        "stop_name": "SAVANUR BUS STAND",
+        "city_name": "SAVANUR",
+        "city_id": 1381,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.644608,
+          15.444641
+        ]
+      },
+      "properties": {
+        "stop_id": "C2100-betageri-bus-stand",
+        "stop_name": "BETAGERI BUS STAND",
+        "city_name": "BETAGERI",
+        "city_id": 2100,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.710353,
+          13.496816
+        ]
+      },
+      "properties": {
+        "stop_id": "C1308-saligrama-bus-stand",
+        "stop_name": "SALIGRAMA BUS STAND",
+        "city_name": "SALIGRAMA",
+        "city_id": 1308,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.628267,
+          13.875725
+        ]
+      },
+      "properties": {
+        "stop_id": "C1624-byndoor-bus-stand",
+        "stop_name": "BYNDOOR BUS STAND",
+        "city_name": "BYNDOOR",
+        "city_id": 1624,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.065935,
+          16.817556
+        ]
+      },
+      "properties": {
+        "stop_id": "C2918-devarhipparagi-bus-stand",
+        "stop_name": "DEVARHIPPARAGI BUS STAND",
+        "city_name": "DEVARHIPPARAGI",
+        "city_id": 2918,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.077197,
+          16.556905
+        ]
+      },
+      "properties": {
+        "stop_id": "C434-hoovinahipparagi-bus-stand",
+        "stop_name": "HOOVINAHIPPARAGI BUS STAND",
+        "city_name": "HOOVINAHIPPARGI",
+        "city_id": 434,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.660242,
+          16.198815
+        ]
+      },
+      "properties": {
+        "stop_id": "C1119-hatti-bus-stand",
+        "stop_name": "HATTI BUS STAND",
+        "city_name": "HATTI",
+        "city_id": 1119,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.092042,
+          14.951592
+        ]
+      },
+      "properties": {
+        "stop_id": "C1273-itagi-bus-stand",
+        "stop_name": "ITAGI BUS STAND",
+        "city_name": "ITAGI",
+        "city_id": 1273,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.60282,
+          15.50001
+        ]
+      },
+      "properties": {
+        "stop_id": "C1489-sriramanagar-bus-stand",
+        "stop_name": "SRIRAMANAGAR BUS STAND",
+        "city_name": "SRIRAMANAGAR",
+        "city_id": 1489,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.820517,
+          13.219002
+        ]
+      },
+      "properties": {
+        "stop_id": "C352-manchakal-bus-stand",
+        "stop_name": "MANCHAKAL BUS STAND",
+        "city_name": "MANCHAKAL",
+        "city_id": 352,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.667986,
+          12.996273
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-tin-factory-metro-stn-pillar-no-598-599",
+        "stop_name": "TIN FACTORY METRO STN PILLAR NO 598-599",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.73841,
+          13.38504
+        ]
+      },
+      "properties": {
+        "stop_id": "C1456-santhekatte-bus-stand",
+        "stop_name": "SANTHEKATTE BUS STAND",
+        "city_name": "SANTHEKATTE",
+        "city_id": 1456,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.223714,
+          14.828831
+        ]
+      },
+      "properties": {
+        "stop_id": "C2134-kottur",
+        "stop_name": "KOTTUR",
+        "city_name": "KOTTUR",
+        "city_id": 2134,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.643499,
+          14.234058
+        ]
+      },
+      "properties": {
+        "stop_id": "C881-honnali",
+        "stop_name": "HONNALI",
+        "city_name": "HONNALI",
+        "city_id": 881,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.833876,
+          12.435918
+        ]
+      },
+      "properties": {
+        "stop_id": "C3218-melamarvathur-bus-stand",
+        "stop_name": "MELAMARVATHUR BUS STAND",
+        "city_name": "MELMARVATUR",
+        "city_id": 3218,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.079284,
+          12.237858
+        ]
+      },
+      "properties": {
+        "stop_id": "C3275-tiruvannamalai-new-busstand",
+        "stop_name": "TIRUVANNAMALAI NEW BUSSTAND",
+        "city_name": "TIRUVANNAMALAI",
+        "city_id": 3275,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.975341,
+          16.572756
+        ]
+      },
+      "properties": {
+        "stop_id": "C1483-bagewadi-bus-stand",
+        "stop_name": "BAGEWADI BUS STAND",
+        "city_name": "BAGEWADI",
+        "city_id": 1483,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.848033,
+          13.063325
+        ]
+      },
+      "properties": {
+        "stop_id": "C1633-kinnigoli-bus-stand",
+        "stop_name": "KINNIGOLI BUS STAND",
+        "city_name": "KINNIGOLI",
+        "city_id": 1633,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.537141,
+          13.458888
+        ]
+      },
+      "properties": {
+        "stop_id": "C65-eslampura-bus-stand",
+        "stop_name": "ESLAMPURA BUS STAND",
+        "city_name": "ESLAPURAM PUTTUR AP",
+        "city_id": 65,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.552862,
+          13.435236
+        ]
+      },
+      "properties": {
+        "stop_id": "C338-puttur-bus-stop",
+        "stop_name": "PUTTUR BUS STOP",
+        "city_name": "PUTTUR ANDHRA PRADESH",
+        "city_id": 338,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.603722,
+          16.231699
+        ]
+      },
+      "properties": {
+        "stop_id": "C743-hukkeri-bus-stand",
+        "stop_name": "HUKKERI BUS STAND",
+        "city_name": "HUKKERI",
+        "city_id": 743,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.781492,
+          10.073575
+        ]
+      },
+      "properties": {
+        "stop_id": "C3197-karaikudi-new-bus-stand",
+        "stop_name": "KARAIKUDI NEW BUS STAND",
+        "city_name": "KARAIKUDI",
+        "city_id": 3197,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.190633,
+          15.18516
+        ]
+      },
+      "properties": {
+        "stop_id": "C207-muthkur-bus-stop",
+        "stop_name": "MUTHKUR BUS STOP",
+        "city_name": "MUTHKUR",
+        "city_id": 207,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.286964,
+          14.72257
+        ]
+      },
+      "properties": {
+        "stop_id": "C5168-ujjini-bus-stand",
+        "stop_name": "UJJINI BUS STAND",
+        "city_name": "UJJINI",
+        "city_id": 5168,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.264885,
+          13.800946
+        ]
+      },
+      "properties": {
+        "stop_id": "C5284-molakalacheruvu-apsrtc-bus-stand",
+        "stop_name": "MOLAKALACHERUVU APSRTC BUS STAND",
+        "city_name": "MULAKALACHERUVU",
+        "city_id": 5284,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.83241,
+          10.931899
+        ]
+      },
+      "properties": {
+        "stop_id": "C3143-karaikal-bus-stand",
+        "stop_name": "KARAIKAL BUS STAND",
+        "city_name": "KARAIKAL",
+        "city_id": 3143,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.738477,
+          11.23446
+        ]
+      },
+      "properties": {
+        "stop_id": "C3212-sirkali-bus-stand",
+        "stop_name": "SIRKALI BUS STAND",
+        "city_name": "SIRKALI",
+        "city_id": 3212,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.491732,
+          11.940417
+        ]
+      },
+      "properties": {
+        "stop_id": "C3292-villupuram-bus-stand",
+        "stop_name": "VILLUPURAM BUS STAND",
+        "city_name": "VILLUPURAM",
+        "city_id": 3292,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.176106,
+          13.654567
+        ]
+      },
+      "properties": {
+        "stop_id": "C283-kalmane-bus-stand",
+        "stop_name": "KALMANE BUS STAND",
+        "city_name": "KALMANE",
+        "city_id": 283,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.217862,
+          12.52864
+        ]
+      },
+      "properties": {
+        "stop_id": "C3195-krishangiri-bus-stand",
+        "stop_name": "KRISHANGIRI BUS STAND",
+        "city_name": "KRISHNAGIRI",
+        "city_id": 3195,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.620762,
+          12.678116
+        ]
+      },
+      "properties": {
+        "stop_id": "C3284-vaniambadi-bus-stand",
+        "stop_name": "VANIAMBADI BUS STAND",
+        "city_name": "VANIAMBADI",
+        "city_id": 3284,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.8733,
+          13.169352
+        ]
+      },
+      "properties": {
+        "stop_id": "C1885-belman-bus-stand",
+        "stop_name": "BELMAN BUS STAND",
+        "city_name": "BELMAN",
+        "city_id": 1885,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.523438,
+          9.585808
+        ]
+      },
+      "properties": {
+        "stop_id": "C2662-kottayam-bus-stand",
+        "stop_name": "KOTTAYAM BUS STAND",
+        "city_name": "KOTTAYAM",
+        "city_id": 2662,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.705219,
+          12.835654
+        ]
+      },
+      "properties": {
+        "stop_id": "C3150-kanchipuram-bus-stand",
+        "stop_name": "KANCHIPURAM BUS STAND",
+        "city_name": "KANCHIPURAM",
+        "city_id": 3150,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.964773,
+          11.738682
+        ]
+      },
+      "properties": {
+        "stop_id": "C3168-kallakurichi-bus-stand",
+        "stop_name": "KALLAKURICHI BUS STAND",
+        "city_name": "KALLAKURICHI",
+        "city_id": 3168,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.967337,
+          16.33744
+        ]
+      },
+      "properties": {
+        "stop_id": "C235-mudalagi-bus-stop",
+        "stop_name": "MUDALAGI BUS STOP",
+        "city_name": "MUDALAGI",
+        "city_id": 235,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.29419,
+          14.615324
+        ]
+      },
+      "properties": {
+        "stop_id": "C936-hosakere-bus-stand",
+        "stop_name": "HOSAKERE BUS STAND",
+        "city_name": "HOSAKERE",
+        "city_id": 936,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.540163,
+          13.584906
+        ]
+      },
+      "properties": {
+        "stop_id": "C252-huliyar-bus-stand",
+        "stop_name": "HULIYAR BUS STAND",
+        "city_name": "HULIYAR",
+        "city_id": 252,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.970281,
+          11.017387
+        ]
+      },
+      "properties": {
+        "stop_id": "C3077-setc-bus-stand-gandhipuram",
+        "stop_name": "SETC BUS STAND GANDHIPURAM",
+        "city_name": "COIMBATORE",
+        "city_id": 3077,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.494223,
+          11.749579
+        ]
+      },
+      "properties": {
+        "stop_id": "C2758-thalassery-bus-stand",
+        "stop_name": "THALASSERY BUS STAND",
+        "city_name": "THALASSERY",
+        "city_id": 2758,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.613298,
+          13.174318
+        ]
+      },
+      "properties": {
+        "stop_id": "C3268-tiruttani-bus-stand",
+        "stop_name": "TIRUTTANI BUS STAND",
+        "city_name": "TIRUTTANI",
+        "city_id": 3268,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.437334,
+          13.165028
+        ]
+      },
+      "properties": {
+        "stop_id": "C3291-r-k-pet-bus-stand",
+        "stop_name": "R.K.PET BUS STAND",
+        "city_name": "R.K.PET",
+        "city_id": 3291,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.420188,
+          13.111063
+        ]
+      },
+      "properties": {
+        "stop_id": "C3209-sholingar-bus-stand",
+        "stop_name": "SHOLINGAR BUS STAND",
+        "city_name": "SHOLINGAR",
+        "city_id": 3209,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.388075,
+          10.958712
+        ]
+      },
+      "properties": {
+        "stop_id": "C3145-kumbakonam-bus-stand",
+        "stop_name": "KUMBAKONAM BUS STAND",
+        "city_name": "KUMBAKONAM",
+        "city_id": 3145,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.25249,
+          16.571427
+        ]
+      },
+      "properties": {
+        "stop_id": "C1009-saidapur-bus-stand",
+        "stop_name": "SAIDAPUR BUS STAND",
+        "city_name": "SAIDAPUR",
+        "city_id": 1009,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.390638,
+          16.870861
+        ]
+      },
+      "properties": {
+        "stop_id": "C3154-gurumitkal-bus-stand",
+        "stop_name": "GURUMITKAL BUS STAND",
+        "city_name": "GURUMITKAL",
+        "city_id": 3154,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.859956,
+          13.605972
+        ]
+      },
+      "properties": {
+        "stop_id": "C1686-shankaranarayana-bus-stand",
+        "stop_name": "SHANKARANARAYANA BUS STAND",
+        "city_name": "SHANKARNARAYANA",
+        "city_id": 1686,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.328319,
+          13.735434
+        ]
+      },
+      "properties": {
+        "stop_id": "C5112-bejjavali-bus-stand",
+        "stop_name": "BEJJAVALI BUS STAND",
+        "city_name": "BEJJAVALLI",
+        "city_id": 5112,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.378168,
+          13.714272
+        ]
+      },
+      "properties": {
+        "stop_id": "C5118-tudur-bus-stand",
+        "stop_name": "TUDUR BUS STAND",
+        "city_name": "TUDUR",
+        "city_id": 5118,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.621855,
+          13.41347
+        ]
+      },
+      "properties": {
+        "stop_id": "C2534-chikkanayakanahalli-bus-stand",
+        "stop_name": "CHIKKANAYAKANAHALLI BUS STAND",
+        "city_name": "CHIKKANAYAKANAHALLI",
+        "city_id": 2534,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.802131,
+          17.252871
+        ]
+      },
+      "properties": {
+        "stop_id": "C2566-zalki-bus-stand",
+        "stop_name": "ZALKI BUS STAND",
+        "city_name": "ZALKI",
+        "city_id": 2566,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.093804,
+          15.908073
+        ]
+      },
+      "properties": {
+        "stop_id": "C55-dornal-bus-stand",
+        "stop_name": "DORNAL BUS STAND",
+        "city_name": "DORNAL",
+        "city_id": 55,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.839416,
+          13.459491
+        ]
+      },
+      "properties": {
+        "stop_id": "C331-kokkarni-bus-stand",
+        "stop_name": "KOKKARNI BUS STAND",
+        "city_name": "KOKKARNI",
+        "city_id": 331,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.246331,
+          12.107899
+        ]
+      },
+      "properties": {
+        "stop_id": "C3296-vetavalam-bus-stand",
+        "stop_name": "VETAVALAM BUS STAND",
+        "city_name": "VETAVALAM",
+        "city_id": 3296,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.755719,
+          11.746379
+        ]
+      },
+      "properties": {
+        "stop_id": "C3079-cuddalore-bus-stand",
+        "stop_name": "CUDDALORE BUS STAND",
+        "city_name": "CUDDALORE",
+        "city_id": 3079,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.622075,
+          17.110413
+        ]
+      },
+      "properties": {
+        "stop_id": "C154-kodangal-bus-stand",
+        "stop_name": "KODANGAL BUS STAND",
+        "city_name": "KODANGAL",
+        "city_id": 154,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.792552,
+          12.304079
+        ]
+      },
+      "properties": {
+        "stop_id": "C3084-chengam-bus-stand",
+        "stop_name": "CHENGAM BUS STAND",
+        "city_name": "CHENGAM",
+        "city_id": 3084,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.507877,
+          13.557916
+        ]
+      },
+      "properties": {
+        "stop_id": "C236-madanapalli-bus-stand",
+        "stop_name": "MADANAPALLI BUS STAND",
+        "city_name": "MADANAPALLI",
+        "city_id": 236,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.818583,
+          16.651739
+        ]
+      },
+      "properties": {
+        "stop_id": "C2095-ugar-bus-stop",
+        "stop_name": "UGAR BUS STOP",
+        "city_name": "UGAR",
+        "city_id": 2095,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.623248,
+          15.174665
+        ]
+      },
+      "properties": {
+        "stop_id": "C2218-vidyanagar-bus-stand",
+        "stop_name": "VIDYANAGAR BUS STAND",
+        "city_name": "VIDYANAGAR JINDAL",
+        "city_id": 2218,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.267173,
+          13.190916
+        ]
+      },
+      "properties": {
+        "stop_id": "C386-thugundrum-bus-stand",
+        "stop_name": "THUGUNDRUM BUS STAND",
+        "city_name": "THUGUNDRUM",
+        "city_id": 386,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.035167,
+          13.275525
+        ]
+      },
+      "properties": {
+        "stop_id": "C142-kanipakam-bus-stand",
+        "stop_name": "KANIPAKAM BUS STAND",
+        "city_name": "KANIPAKAM",
+        "city_id": 142,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.627745,
+          11.666287
+        ]
+      },
+      "properties": {
+        "stop_id": "C1344-bandipura-bus-stand",
+        "stop_name": "BANDIPURA BUS STAND",
+        "city_name": "BANDIPURA",
+        "city_id": 1344,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.489619,
+          12.66552
+        ]
+      },
+      "properties": {
+        "stop_id": "C2183-k-r-pet-bus-stand",
+        "stop_name": "K R PET BUS STAND",
+        "city_name": "K R PET",
+        "city_id": 2183,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.94452,
+          13.654592
+        ]
+      },
+      "properties": {
+        "stop_id": "C712-pileru-bus-stand",
+        "stop_name": "PILERU BUS STAND",
+        "city_name": "PILERU",
+        "city_id": 712,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.224129,
+          15.399277
+        ]
+      },
+      "properties": {
+        "stop_id": "C904-alur-bus-stand",
+        "stop_name": "ALUR BUS STAND",
+        "city_name": "ALUR",
+        "city_id": 904,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.519111,
+          10.733132
+        ]
+      },
+      "properties": {
+        "stop_id": "C3113-dharapura-bus-stand",
+        "stop_name": "DHARAPURA BUS STAND",
+        "city_name": "DHARAPURA",
+        "city_id": 3113,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.341212,
+          11.132086
+        ]
+      },
+      "properties": {
+        "stop_id": "C3247-thirupur-bus-stand",
+        "stop_name": "THIRUPUR BUS STAND",
+        "city_name": "THIRUPUR",
+        "city_id": 3247,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.793468,
+          11.343623
+        ]
+      },
+      "properties": {
+        "stop_id": "C3103-coonur-bus-stand",
+        "stop_name": "COONUR BUS STAND",
+        "city_name": "COONUR",
+        "city_id": 3103,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.037268,
+          14.970263
+        ]
+      },
+      "properties": {
+        "stop_id": "C27-mundgod-bus-stand",
+        "stop_name": "MUNDGOD BUS STAND",
+        "city_name": "MUNDGOD",
+        "city_id": 27,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.260981,
+          15.855908
+        ]
+      },
+      "properties": {
+        "stop_id": "C250-nandikottur-bus-stand",
+        "stop_name": "NANDIKOTTUR BUS STAND",
+        "city_name": "NANDIKOTTUR",
+        "city_id": 250,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.790295,
+          16.05013
+        ]
+      },
+      "properties": {
+        "stop_id": "C1802-guledegudda-bus-stand",
+        "stop_name": "GULEDEGUDDA BUS STAND",
+        "city_name": "GULEDEGUDDA",
+        "city_id": 1802,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.013272,
+          14.695514
+        ]
+      },
+      "properties": {
+        "stop_id": "C2930-dasanakoppa-bus-stand",
+        "stop_name": "DASANAKOPPA BUS STAND",
+        "city_name": "DASANAKOPPA",
+        "city_id": 2930,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.050384,
+          16.227562
+        ]
+      },
+      "properties": {
+        "stop_id": "C295-narasaraopet-bus-stand",
+        "stop_name": "NARASARAOPET BUS STAND",
+        "city_name": "NARASARAOPET",
+        "city_id": 295,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.028397,
+          16.17529
+        ]
+      },
+      "properties": {
+        "stop_id": "C1519-sirwar-bus-stand",
+        "stop_name": "SIRWAR BUS STAND",
+        "city_name": "SIRWARA",
+        "city_id": 1519,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.812089,
+          14.164446
+        ]
+      },
+      "properties": {
+        "stop_id": "C343-puttaparthi-bus-stand",
+        "stop_name": "PUTTAPARTHI BUS STAND",
+        "city_name": "PUTTAPARTHI",
+        "city_id": 343,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.894536,
+          16.670587
+        ]
+      },
+      "properties": {
+        "stop_id": "C976-ainapura-bus-stand",
+        "stop_name": "AINAPURA BUS STAND",
+        "city_name": "AINAPURA",
+        "city_id": 976,
         "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.416512,
+          12.254209
+        ]
+      },
+      "properties": {
+        "stop_id": "C3124-gingee-bus-stand",
+        "stop_name": "GINGEE BUS STAND",
+        "city_name": "GINGEE",
+        "city_id": 3124,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.214127,
+          13.66044
+        ]
+      },
+      "properties": {
+        "stop_id": "C2643-madhugiri-bus-stand",
+        "stop_name": "MADHUGIRI BUS STAND",
+        "city_name": "MADHUGIRI",
+        "city_id": 2643,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.747072,
+          14.639243
+        ]
+      },
+      "properties": {
+        "stop_id": "C1590-kondasagara-bus-stand",
+        "stop_name": "KONDASAGARA BUS STAND",
+        "city_name": "KONDASAGARA",
+        "city_id": 1590,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.676393,
+          14.592492
+        ]
+      },
+      "properties": {
+        "stop_id": "C1717-b-g-kere-bus-stand",
+        "stop_name": "B G KERE BUS STAND",
+        "city_name": "B.G.KERE",
+        "city_id": 1717,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.68021,
+          14.44906
+        ]
+      },
+      "properties": {
+        "stop_id": "C1839-talaku-bus-stand",
+        "stop_name": "TALAKU BUS STAND",
+        "city_name": "TALAKU",
+        "city_id": 1839,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.028408,
+          18.116893
+        ]
+      },
+      "properties": {
+        "stop_id": "C2854-indapur-bus-stand",
+        "stop_name": "INDAPUR BUS STAND",
+        "city_name": "INDAPUR",
+        "city_id": 2854,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.489708,
+          14.095077
+        ]
+      },
+      "properties": {
+        "stop_id": "C110-murdeshwara",
+        "stop_name": "MURDESHWARA",
+        "city_name": "MURDESHWARA",
+        "city_id": 110,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.791704,
+          12.470468
+        ]
+      },
+      "properties": {
+        "stop_id": "C1350-jakkanahalli-bus-stand",
+        "stop_name": "JAKKANAHALLI BUS STAND",
+        "city_name": "JAKKANAHALLI",
+        "city_id": 1350,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.775784,
+          14.446313
+        ]
+      },
+      "properties": {
+        "stop_id": "C3151-golimakki-bus-stop",
+        "stop_name": "GOLIMAKKI BUS STOP",
+        "city_name": "GOLIMAKKI",
+        "city_id": 3151,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.49777,
+          10.239097
+        ]
+      },
+      "properties": {
+        "stop_id": "C3157-kodaikanal-bus-stand",
+        "stop_name": "KODAIKANAL BUS STAND",
+        "city_name": "KODAIKANAL",
+        "city_id": 3157,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.159249,
+          11.652807
+        ]
+      },
+      "properties": {
+        "stop_id": "C3226-salem-bus-stand",
+        "stop_name": "SALEM BUS STAND",
+        "city_name": "SALEM",
+        "city_id": 3226,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.521398,
+          17.044196
+        ]
+      },
+      "properties": {
+        "stop_id": "C347-ravalpalli-bus-stand",
+        "stop_name": "RAVALPALLI BUS STAND",
+        "city_name": "RAVALPALLI",
+        "city_id": 347,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.633337,
+          16.39776
+        ]
+      },
+      "properties": {
+        "stop_id": "C9-achampet-bus-stand",
+        "stop_name": "ACHAMPET BUS STAND",
+        "city_name": "ACHAMPET",
+        "city_id": 9,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.954901,
+          16.276638
+        ]
+      },
+      "properties": {
+        "stop_id": "C818-arakera-bus-stand",
+        "stop_name": "ARAKERA BUS STAND",
+        "city_name": "ARAKERA AKA",
+        "city_id": 818,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.483223,
+          12.600842
+        ]
+      },
+      "properties": {
+        "stop_id": "C2862-ellimale-bus-stop",
+        "stop_name": "ELLIMALE BUS STOP",
+        "city_name": "ELLIMALE",
+        "city_id": 2862,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.37449,
+          11.875369
+        ]
+      },
+      "properties": {
+        "stop_id": "C2582-kannur",
+        "stop_name": "KANNUR",
+        "city_name": "KANNUR",
+        "city_id": 2582,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.63402,
+          14.616046
+        ]
+      },
+      "properties": {
+        "stop_id": "C931-ranebennur",
+        "stop_name": "RANEBENNUR",
+        "city_name": "RANEBENNUR",
+        "city_id": 931,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.646137,
+          15.08158
+        ]
+      },
+      "properties": {
+        "stop_id": "C1442-bellatti-bus-stand",
+        "stop_name": "BELLATTI BUS STAND",
+        "city_name": "BELLATTI",
+        "city_id": 1442,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.5792,
+          15.234576
+        ]
+      },
+      "properties": {
+        "stop_id": "C1462-shirahatti-bus-stand",
+        "stop_name": "SHIRAHATTI BUS STAND",
+        "city_name": "SHIRAHATTI",
+        "city_id": 1462,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.622519,
+          12.931243
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-koramangala-bda-complex",
+        "stop_name": "KORAMANGALA BDA COMPLEX",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.531967,
+          15.423149
+        ]
+      },
+      "properties": {
+        "stop_id": "C57-gangavathi",
+        "stop_name": "GANGAVATHI",
+        "city_name": "GANGAVATHI",
+        "city_id": 57,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C3139-erode-bus-stand",
+        "stop_name": "ERODE BUS STAND",
+        "city_name": "ERODE IRD",
+        "city_id": 3139,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.6482639,
+          12.6662563
+        ]
+      },
+      "properties": {
+        "stop_id": "C199-melukote",
+        "stop_name": "MELUKOTE",
+        "city_name": "MELUKOTE",
+        "city_id": 199,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.691498,
+          12.420797
+        ]
+      },
+      "properties": {
+        "stop_id": "C1436-srirangapatna",
+        "stop_name": "SRIRANGAPATNA",
+        "city_name": "SRIRANGAPATNA",
+        "city_id": 1436,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C556-mulbagal",
+        "stop_name": "MULBAGAL",
+        "city_name": "MULBAGAL",
+        "city_id": 556,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.2719163,
+          12.9580972
+        ]
+      },
+      "properties": {
+        "stop_id": "C1166-avani",
+        "stop_name": "AVANI",
+        "city_name": "AVANI",
+        "city_id": 1166,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C1998-bangarpete",
+        "stop_name": "BANGARPETE",
+        "city_name": "BANGARPETE",
+        "city_id": 1998,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C2548-chikkathirupath",
+        "stop_name": "CHIKKATHIRUPATH",
+        "city_name": "CHIKKA TIRUPATHI",
+        "city_id": 2548,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.698424,
+          13.589801
+        ]
+      },
+      "properties": {
+        "stop_id": "C2354-koteswara",
+        "stop_name": "KOTESWARA",
+        "city_name": "KOTESWARA",
+        "city_id": 2354,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.156195,
+          9.943858
+        ]
+      },
+      "properties": {
+        "stop_id": "C3231-madurai",
+        "stop_name": "MADURAI",
+        "city_name": "MADURAI",
+        "city_id": 3231,
+        "source": "estimate"
       }
     }
   ]

@@ -4,3 +4,5 @@
 *.log
 .env
 summary.txt
+/.pfaedle/
+/.osm_cache/
