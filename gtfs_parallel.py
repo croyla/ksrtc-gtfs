@@ -15,8 +15,6 @@ import time
 import random
 import re
 import math
-import subprocess
-import shutil
 
 # ── CLI args ──────────────────────────────────────────────────────────────────
 
@@ -62,9 +60,6 @@ parser.add_argument('--max-expansion-rounds', type=int, default=3,
 parser.add_argument('--no-city-name-dedup', action='store_true',
                      help='Disable reusing a city centre across different city_ids that share the '
                           'same name (default: enabled — skips a redundant Overpass city lookup)')
-parser.add_argument('--skip-shapes', action='store_true',
-                     help='Skip shapes.txt generation via pfaedle (default: enabled — builds pfaedle '
-                          'from source and downloads OSM extracts on first run, which can take a while)')
 
 args = parser.parse_args()
 
@@ -752,12 +747,15 @@ def dt_to_gtfs(dt: datetime, base_date: datetime.date) -> str:
 
 logger.info("Phase 1: Fetching city list...")
 all_cities: dict[int, str] = {}  # city_id → city_name
+city_codes: dict[int, str] = {}  # city_id → KSRTC's own short code (e.g. 368 → "BNG")
 
 resp = cached_get(f"{BASE_URL}/getStaticCityList")
 if resp:
     data = resp.json().get("data", {})
     for entry in data.values():
         all_cities[entry["ID"]] = entry["Name"]
+        if entry.get("Key"):
+            city_codes[entry["ID"]] = entry["Key"]
     logger.info(f"Loaded {len(all_cities)} cities")
 else:
     logger.error("Failed to fetch city list; aborting")
@@ -1290,8 +1288,26 @@ start_date = service_dates[0].replace("-", "")
 end_date = service_dates[-1].replace("-", "")
 
 service_dates_dt = [datetime.strptime(d, "%Y-%m-%d").date() for d in service_dates]
+
+# If discovery started today, a trip missing from just today's probe can be a
+# same-day booking-chart timing artifact (the chart may not be open yet, or
+# may already be past a per-day cutoff by the time this run queried it) --
+# not evidence the service doesn't actually run today. So when judging
+# regularity/full-coverage below, drop today from the horizon dates a service
+# is required to cover; a service matching on every *other* day still gets
+# treated as covering today too (the emitted calendar.txt start_date is the
+# unmodified global start_date either way, so this never shortens a service's
+# declared range -- it only widens which observed patterns qualify for
+# calendar.txt over calendar_dates.txt).
+_today = datetime.now().date()
+_regularity_horizon = (
+    [d for d in service_dates_dt if d != _today]
+    if service_dates_dt and service_dates_dt[0] == _today
+    else service_dates_dt
+)
+
 dates_by_weekday: dict[int, list] = defaultdict(list)
-for d in service_dates_dt:
+for d in _regularity_horizon:
     dates_by_weekday[d.weekday()].append(d)  # Monday=0 … Sunday=6, matches GTFS calendar.txt column order
 
 weekday_service_ids: dict[tuple[int, ...], str] = {}
@@ -1301,12 +1317,22 @@ calendar_rows = [["service_id", "monday", "tuesday", "wednesday", "thursday", "f
 irregular_service_ids: dict[frozenset, str] = {}
 calendar_dates_rows = [["service_id", "date", "exception_type"]]
 
+# Keyed by the service's own (start_date, end_date) -- distinct from
+# weekday_service_ids, which always uses the *global* start_date/end_date.
+# Covers a service that runs every single day from some point through the end
+# of the discovered horizon, but wasn't active for the horizon's earlier days
+# (e.g. a schedule that only launched a few days into the discovery window) --
+# still fully regular (no gaps once it starts), just not aligned to
+# start_date, so the weekday-uniformity check below would otherwise reject it
+# as irregular and force it into calendar_dates.txt for no good reason.
+full_coverage_service_ids: dict[tuple[str, str], str] = {}
+
 
 def get_service_id(date_strs: set[str]) -> str:
     """Return a GTFS service_id for a set of active-date strings, creating a
-    shared calendar.txt row for a clean weekday pattern, or a shared
-    calendar_dates.txt entry set for an irregular one — whichever the
-    observed dates actually support."""
+    shared calendar.txt row for a clean weekday pattern or a full-coverage
+    date range, or a shared calendar_dates.txt entry set for an irregular one
+    — whichever the observed dates actually support."""
     active_dates = set()
     for ds in date_strs:
         try:
@@ -1338,6 +1364,34 @@ def get_service_id(date_strs: set[str]) -> str:
             service_id = f"WD_{''.join(str(f) for f in weekday_flags)}"
             weekday_service_ids[key] = service_id
             calendar_rows.append([service_id, *weekday_flags, start_date, end_date])
+        return service_id
+
+    # Not a clean weekly pattern -- but still collapsible into calendar.txt if
+    # it's active on literally every remaining day of the horizon starting
+    # from its own first active date (a gap-free run through to the end,
+    # e.g. dates_by_weekday would reject this above only because the horizon's
+    # *earlier* days -- before this service started -- are inactive).
+    sorted_active = sorted(active_dates)
+    svc_start = None
+    if sorted_active and sorted_active[-1] == service_dates_dt[-1]:
+        # Same today tolerance as above: a service active on every horizon day
+        # except (at most) today still counts as covering the full range,
+        # assumed to include today too -- so its calendar.txt entry keeps the
+        # unmodified global start_date rather than getting shifted to tomorrow.
+        if [d for d in sorted_active if d != _today] == _regularity_horizon:
+            svc_start = start_date
+        else:
+            expected = [d for d in _regularity_horizon if d >= sorted_active[0]]
+            if sorted_active == expected:
+                svc_start = sorted_active[0].strftime("%Y%m%d")
+
+    if svc_start is not None:
+        key = (svc_start, end_date)
+        service_id = full_coverage_service_ids.get(key)
+        if service_id is None:
+            service_id = f"FULL_{svc_start}"
+            full_coverage_service_ids[key] = service_id
+            calendar_rows.append([service_id, 1, 1, 1, 1, 1, 1, 1, svc_start, end_date])
         return service_id
 
     key = frozenset(active_dates)
@@ -1387,14 +1441,14 @@ for trip_id, stops in trip_stops.items():
     pickups = stops["pickups"]
     dropoffs = stops["dropoffs"]
 
-    # Build unified stop list with (datetime, stop_id, stop_name, city_name, is_pickup)
-    stop_events: list[tuple[datetime, str, str, str]] = []
+    # Build unified stop list with (datetime, stop_id, stop_name, city_name, city_id)
+    stop_events: list[tuple[datetime, str, str, str, int | None]] = []
 
     for p in pickups:
         try:
             dt = parse_api_dt(p["PickupTime"])
             sid = canonical_stop_id(p.get("CityID"), p["PickupName"], p["CityName"])
-            stop_events.append((dt, sid, p["PickupName"], p["CityName"]))
+            stop_events.append((dt, sid, p["PickupName"], p["CityName"], p.get("CityID")))
         except Exception:
             pass
 
@@ -1402,7 +1456,7 @@ for trip_id, stops in trip_stops.items():
         try:
             dt = parse_api_dt(d["DropoffTime"])
             sid = canonical_stop_id(d.get("CityID"), d["DropoffName"], d["CityName"])
-            stop_events.append((dt, sid, d["DropoffName"], d["CityName"]))
+            stop_events.append((dt, sid, d["DropoffName"], d["CityName"], d.get("CityID")))
         except Exception:
             pass
 
@@ -1417,15 +1471,15 @@ for trip_id, stops in trip_stops.items():
     # If first stop is in the future relative to base_date, that's fine.
     # Adjust post-midnight stops: if a stop's time is before the previous stop's time,
     # it crossed midnight — add 1 day.
-    adjusted: list[tuple[datetime, str, str, str]] = []
+    adjusted: list[tuple[datetime, str, str, str, int | None]] = []
     prev_dt = None
     day_offset = timedelta(0)
-    for dt, sid, sname, cname in stop_events:
+    for dt, sid, sname, cname, cid in stop_events:
         adj_dt = dt + day_offset
         if prev_dt and adj_dt < prev_dt:
             day_offset += timedelta(days=1)
             adj_dt = dt + day_offset
-        adjusted.append((adj_dt, sid, sname, cname))
+        adjusted.append((adj_dt, sid, sname, cname, cid))
         prev_dt = adj_dt
 
     # Anchor to base_date: find the date of the first event
@@ -1444,6 +1498,8 @@ for trip_id, stops in trip_stops.items():
     destination_stop_name = adjusted[-1][2].title()
     origin_city = adjusted[0][3].title()
     destination_city = adjusted[-1][3].title()
+    origin_code = city_codes.get(adjusted[0][4])
+    destination_code = city_codes.get(adjusted[-1][4])
     trip_headsign = destination_stop_name
 
     # Normally one split (the common case): KSRTC reported the same ServiceType
@@ -1479,11 +1535,23 @@ for trip_id, stops in trip_stops.items():
         if route_id not in seen_route_ids:
             seen_route_ids.add(route_id)
             long_name = f"{label}: {origin_city} to {destination_city}"
-            route_name = (meta.get("route_name") or "").strip()
-            route_short_name = f"{route_name} {label}" if route_name else route_id.replace("_", " ")
+            # Built from this trip's actual first/last stop cities (same source as
+            # long_name above), not KSRTC's raw RouteName -- that field names the
+            # bus's overall nominal route (e.g. a Bengaluru->Mumbai through-service
+            # surfaced via a Bengaluru->Pune search reports RouteName "BNG-MUM-BRA"),
+            # which can disagree with this route's real origin/destination and make
+            # the route unfindable by riders searching for the actual city pair.
+            # Prefer KSRTC's own city codes (e.g. "BNG"/"PNA", the same ones baked
+            # into od_code from the trip_code) so the short name matches how riders
+            # already know these routes; fall back to full city names if a code is
+            # missing from the static city list.
+            if origin_code and destination_code:
+                route_short_name = f"{origin_code}-{destination_code} {label}"
+            else:
+                route_short_name = f"{origin_city}-{destination_city} {label}"
             routes_rows.append([route_id, "KSRTC", route_short_name, long_name, 3])
 
-        for seq, (adj_dt, sid, sname, cname) in enumerate(adjusted, 1):
+        for seq, (adj_dt, sid, sname, cname, cid) in enumerate(adjusted, 1):
             gtfs_time = dt_to_gtfs(adj_dt, anchor_date)
             timepoint = 1 if seq == 1 or seq == len(adjusted) else 0
             stop_times_rows.append([trip_out_id, gtfs_time, gtfs_time, str(sid), seq, timepoint])
@@ -1534,254 +1602,8 @@ with open(f"{OUTPUT_DIR}/feed_info.txt", "w") as f:
         f"BLRTransit,https://blrtransit.com,en,{start_date},{end_date},https://blrtransit.com\n"
     )
 
-# ── Phase 6: shape generation via pfaedle ───────────────────────────────────
-#
-# pfaedle (https://github.com/ad-freiburg/pfaedle) map-matches each trip's
-# station-to-station path against an OSM road network to produce shapes.txt.
-# It has no Homebrew formula, so we build it from source into .pfaedle/ (git-
-# ignored) on first run. It also needs an OSM extract covering the trips'
-# stops; we auto-select and download only the Geofabrik India zone(s) that
-# actually contain a stop, cached under .osm_cache/ (also gitignored).
-
-PFAEDLE_DIR = os.path.abspath(".pfaedle")
-PFAEDLE_REPO_DIR = os.path.join(PFAEDLE_DIR, "src")
-PFAEDLE_BUILD_DIR = os.path.join(PFAEDLE_REPO_DIR, "build")
-PFAEDLE_BIN = os.path.join(PFAEDLE_BUILD_DIR, "pfaedle")
-PFAEDLE_CFG = os.path.join(PFAEDLE_REPO_DIR, "pfaedle.cfg")
-OSM_CACHE_DIR = os.path.abspath(".osm_cache")
-GEOFABRIK_BASE = "https://download.geofabrik.de/asia/india"
-GEOFABRIK_ZONES = [
-    "southern-zone", "western-zone", "central-zone",
-    "eastern-zone", "northern-zone", "north-eastern-zone",
-]
-
-
-def ensure_pfaedle_built() -> str | None:
-    if os.path.isfile(PFAEDLE_BIN) and os.access(PFAEDLE_BIN, os.X_OK):
-        return PFAEDLE_BIN
-    logger.info("pfaedle binary not found — cloning and building from source "
-                "(this can take a few minutes on first run)...")
-    os.makedirs(PFAEDLE_DIR, exist_ok=True)
-    try:
-        if not os.path.isdir(os.path.join(PFAEDLE_REPO_DIR, ".git")):
-            subprocess.run(
-                ["git", "clone", "--recurse-submodules",
-                 "https://github.com/ad-freiburg/pfaedle", PFAEDLE_REPO_DIR],
-                check=True,
-            )
-        os.makedirs(PFAEDLE_BUILD_DIR, exist_ok=True)
-        subprocess.run(["cmake", ".."], cwd=PFAEDLE_BUILD_DIR, check=True)
-        subprocess.run(["make", "-j"], cwd=PFAEDLE_BUILD_DIR, check=True)
-    except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        logger.error(f"Failed to build pfaedle ({e}); skipping shape generation")
-        return None
-    if not os.path.isfile(PFAEDLE_BIN):
-        logger.error("pfaedle build finished but binary is missing; skipping shape generation")
-        return None
-    return PFAEDLE_BIN
-
-
-def _parse_poly(text: str) -> list[list[tuple[float, float]]]:
-    """Parse an Osmosis .poly file into a list of (lon, lat) rings."""
-    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
-    rings: list[list[tuple[float, float]]] = []
-    cur: list[tuple[float, float]] | None = None
-    for line in lines[1:]:  # line 0 is the polygon file's name, skip it
-        if line == "END":
-            if cur is not None:
-                rings.append(cur)
-                cur = None
-            continue
-        parts = line.split()
-        if cur is None and len(parts) == 1:
-            cur = []
-            continue
-        if cur is not None and len(parts) >= 2:
-            lon, lat = float(parts[0]), float(parts[1])
-            cur.append((lon, lat))
-    return rings
-
-
-def _point_in_rings(lon: float, lat: float, rings: list[list[tuple[float, float]]]) -> bool:
-    """Even-odd ray-casting test summed over all rings (correctly handles holes)."""
-    inside = False
-    for ring in rings:
-        n = len(ring)
-        for i in range(n):
-            x1, y1 = ring[i]
-            x2, y2 = ring[(i + 1) % n]
-            if (y1 > lat) != (y2 > lat):
-                x_int = x1 + (lat - y1) * (x2 - x1) / (y2 - y1)
-                if lon < x_int:
-                    inside = not inside
-    return inside
-
-
-def zones_covering_stops(stop_points: list[tuple[float, float]]) -> list[str]:
-    os.makedirs(OSM_CACHE_DIR, exist_ok=True)
-    needed = []
-    for zone in GEOFABRIK_ZONES:
-        poly_path = os.path.join(OSM_CACHE_DIR, f"{zone}.poly")
-        if not os.path.isfile(poly_path):
-            resp = requests.get(f"{GEOFABRIK_BASE}/{zone}.poly", timeout=30)
-            resp.raise_for_status()
-            with open(poly_path, "w") as f:
-                f.write(resp.text)
-        rings = _parse_poly(open(poly_path).read())
-        if any(_point_in_rings(lon, lat, rings) for lon, lat in stop_points):
-            needed.append(zone)
-    return needed
-
-
-def download_zone_pbf(zone: str) -> str:
-    dest = os.path.join(OSM_CACHE_DIR, f"{zone}.osm.pbf")
-    if os.path.isfile(dest) and os.path.getsize(dest) > 0:
-        return dest
-    url = f"{GEOFABRIK_BASE}/{zone}-latest.osm.pbf"
-    logger.info(f"Downloading OSM extract for {zone} (this may take a while)...")
-    tmp = dest + ".part"
-    with requests.get(url, stream=True, timeout=600) as r:
-        r.raise_for_status()
-        with open(tmp, "wb") as f:
-            for chunk in r.iter_content(chunk_size=1 << 20):
-                f.write(chunk)
-    os.replace(tmp, dest)
-    return dest
-
-
-def merge_zone_pbfs(zones: list[str], pbf_paths: list[str]) -> str | None:
-    """Merge multiple zone .osm.pbf files into one via `osmium merge`, so
-    pfaedle can map-match cross-zone (interstate) trips in a single run.
-    Returns the merged PBF path, or None if osmium-tool isn't available."""
-    if shutil.which("osmium") is None:
-        return None
-    merged_path = os.path.join(OSM_CACHE_DIR, f"merged-{'-'.join(sorted(zones))}.osm.pbf")
-    if os.path.isfile(merged_path) and os.path.getsize(merged_path) > 0:
-        return merged_path
-    logger.info(f"Merging OSM zones via osmium: {', '.join(zones)}...")
-    tmp = merged_path + ".part"
-    cmd = ["osmium", "merge", *pbf_paths, "-o", tmp, "-f", "pbf", "--overwrite"]
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        logger.error(f"osmium merge failed: {result.stderr[-2000:]}")
-        if os.path.isfile(tmp):
-            os.remove(tmp)
-        return None
-    os.replace(tmp, merged_path)
-    return merged_path
-
-
-def run_pfaedle(pfaedle_bin: str, osm_pbf: str, gtfs_zip: str, out_dir: str) -> bool:
-    os.makedirs(out_dir, exist_ok=True)
-    cmd = [pfaedle_bin, "-x", osm_pbf, "-m", "bus", "-c", PFAEDLE_CFG, gtfs_zip]
-    logger.info(f"Running pfaedle against {os.path.basename(osm_pbf)}...")
-    result = subprocess.run(cmd, cwd=out_dir, capture_output=True, text=True)
-    if result.returncode != 0:
-        logger.error(f"pfaedle failed for {osm_pbf}: {result.stderr[-2000:]}")
-        return False
-    return True
-
-
-def merge_shapes_into_output(zone_out_dirs: list[str]):
-    """Merge shapes.txt / trips.txt shape_id from one or more pfaedle gtfs-out
-    dirs into OUTPUT_DIR, preferring the first zone that matched each trip."""
-    trip_shape_id: dict[str, str] = {}
-    shape_groups: dict[str, pd.DataFrame] = {}
-    for out_dir in zone_out_dirs:
-        gtfs_out = os.path.join(out_dir, "gtfs-out")
-        shapes_path = os.path.join(gtfs_out, "shapes.txt")
-        trips_path = os.path.join(gtfs_out, "trips.txt")
-        if not os.path.isfile(shapes_path) or not os.path.isfile(trips_path):
-            continue
-        trips_df = pd.read_csv(trips_path, dtype=str)
-        if "shape_id" not in trips_df.columns:
-            continue
-        for _, row in trips_df.iterrows():
-            tid, sid = row["trip_id"], row.get("shape_id")
-            if tid not in trip_shape_id and isinstance(sid, str) and sid:
-                trip_shape_id[tid] = sid
-        shapes_df = pd.read_csv(shapes_path, dtype=str)
-        for sid, group in shapes_df.groupby("shape_id"):
-            shape_groups.setdefault(sid, group)
-
-    if not trip_shape_id:
-        logger.warning("pfaedle produced no shapes; leaving GTFS feed without shapes.txt")
-        return
-
-    used_shape_ids = set(trip_shape_id.values())
-    shapes_out = pd.concat(
-        [shape_groups[sid] for sid in used_shape_ids if sid in shape_groups], ignore_index=True
-    )
-    shapes_out.to_csv(f"{OUTPUT_DIR}/shapes.txt", index=False)
-
-    trips_df = pd.read_csv(f"{OUTPUT_DIR}/trips.txt", dtype=str)
-    trips_df["shape_id"] = trips_df["trip_id"].map(trip_shape_id).fillna("")
-    trips_df.to_csv(f"{OUTPUT_DIR}/trips.txt", index=False)
-
-    n_matched = sum(1 for v in trip_shape_id.values() if v)
-    logger.info(f"pfaedle matched shapes for {n_matched}/{len(trips_df)} trips "
-                f"across {len(zone_out_dirs)} OSM zone(s)")
-
-
-if args.skip_shapes:
-    logger.info("Skipping shape generation (--skip-shapes)")
-else:
-    with open(f"{OUTPUT_DIR}/attribution.txt", "w") as f:
-        f.write(
-            "attribution_id,organization_name,attribution_url,is_producer,is_operator,is_authority\n"
-            f"osm,OpenStreetMap Contributors,en,https://openstreetmap.org,,,\n"
-        )
-    stop_points = [(float(r[3]), float(r[2])) for r in stops_rows[1:]]  # (lon, lat)
-    needed_zones = zones_covering_stops(stop_points) if stop_points else []
-    if not needed_zones:
-        logger.warning("No stops matched any Geofabrik India zone; skipping shape generation")
-    else:
-        logger.info(f"Stops span OSM zone(s): {', '.join(needed_zones)}")
-        pfaedle_bin = ensure_pfaedle_built()
-        if pfaedle_bin is None:
-            logger.warning("pfaedle unavailable; continuing without shapes.txt")
-        else:
-            # pfaedle needs a zip to read from — write one now and replace it
-            # with the final archive (including shapes.txt) further below.
-            tmp_zip_path = os.path.join(PFAEDLE_DIR, "pre-shapes.zip")
-            with zipfile.ZipFile(tmp_zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
-                for fname in os.listdir(OUTPUT_DIR):
-                    if fname == ".DS_Store":
-                        continue
-                    zipf.write(os.path.join(OUTPUT_DIR, fname), arcname=fname)
-
-            pbf_paths = {}
-            for zone in needed_zones:
-                try:
-                    pbf_paths[zone] = download_zone_pbf(zone)
-                except requests.RequestException as e:
-                    logger.error(f"Failed to download OSM extract for {zone}: {e}")
-
-            zone_out_dirs = []
-            if len(pbf_paths) > 1:
-                merged_pbf = merge_zone_pbfs(list(pbf_paths.keys()), list(pbf_paths.values()))
-                if merged_pbf is not None:
-                    out_dir = os.path.join(PFAEDLE_DIR, "out", "merged")
-                    if run_pfaedle(pfaedle_bin, merged_pbf, tmp_zip_path, out_dir):
-                        zone_out_dirs.append(out_dir)
-                else:
-                    logger.warning(
-                        "osmium-tool not found; running pfaedle once per zone instead of "
-                        "merging. Cross-zone (interstate) trips may get incomplete shapes "
-                        "since each run only sees roads within its own zone — "
-                        "`brew install osmium-tool` to enable automatic merging."
-                    )
-
-            if not zone_out_dirs:
-                for zone, pbf_path in pbf_paths.items():
-                    out_dir = os.path.join(PFAEDLE_DIR, "out", zone)
-                    if run_pfaedle(pfaedle_bin, pbf_path, tmp_zip_path, out_dir):
-                        zone_out_dirs.append(out_dir)
-
-            if zone_out_dirs:
-                merge_shapes_into_output(zone_out_dirs)
-            else:
-                logger.warning("All pfaedle runs failed; continuing without shapes.txt")
+# Shape generation via pfaedle now lives in gtfs_compat.py, run as a
+# post-processing step against gtfs.zip (see --skip-shapes there).
 
 # ── Zip ───────────────────────────────────────────────────────────────────────
 

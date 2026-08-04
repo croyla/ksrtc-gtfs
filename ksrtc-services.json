@@ -18,12 +18,13 @@
     "AMBAARI DREAM CLASS (AC SLEEPER)": "AMBAARI",
     "AMOGHAVARSHA (NON AC SLEEPER)": "AMOGHAVARSHA",
     "KALYANA RATHA (AC SLEEPER)": "KALYANARATHA",
+    "KALYANA RATHA MINI (AC SLEEPER)": "KALYANARATHA",
     "FLYBUS": "FLYBUS",
     "EV POWER PLUS": "EV_POWER_PLUS",
     "BMTC VOLVO": "BMTC_VOLVO"
   },
   "labels": {
-    "SARIGE": "Karnataka Sarige",
+    "SARIGE": "Sarige",
     "PALLAKKI": "Pallakki",
     "AMBAARI": "Ambaari",
     "AIRAVAT": "Airavat",

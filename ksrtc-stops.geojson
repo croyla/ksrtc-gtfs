@@ -8676,8 +8676,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.512644,
+          12.828342
         ]
       },
       "properties": {
@@ -8685,7 +8685,7 @@
         "stop_name": "ART OF LIVING ASHRAMA",
         "city_name": "ART OF LIVING",
         "city_id": 5302,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -8693,8 +8693,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.573261,
+          12.906496
         ]
       },
       "properties": {
@@ -8702,7 +8702,7 @@
         "stop_name": "JP NAGAR 6TH PHASE",
         "city_name": "JP NAGAR 6TH PHASE",
         "city_id": 5063,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -8710,8 +8710,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.584884,
+          12.928629
         ]
       },
       "properties": {
@@ -8719,7 +8719,7 @@
         "stop_name": "JAYANAGAR 4TH BLOCK TTMC",
         "city_name": "JAYANAGAR 4TH BLOCK TTMC",
         "city_id": 5064,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -8727,8 +8727,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.592745,
+          12.954282
         ]
       },
       "properties": {
@@ -8736,7 +8736,7 @@
         "stop_name": "SHANTHINAGAR BMTC TTMC",
         "city_name": "SHANTHINAGAR BMTC TTMC",
         "city_id": 5065,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -12688,8 +12688,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.59105,
+          12.030728
         ]
       },
       "properties": {
@@ -12697,7 +12697,7 @@
         "stop_name": "M M HILLS BUS STAND",
         "city_name": "M M HILLS BUS STAND",
         "city_id": 10,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -15680,8 +15680,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.2804797,
-          12.7252766
+          77.335172,
+          12.768207
         ]
       },
       "properties": {
@@ -15689,7 +15689,7 @@
         "stop_name": "RAMANAGAR MAYAGANAHALLI BYPASS",
         "city_name": "RAMANAGARA",
         "city_id": 599,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -21622,7 +21622,7 @@
         "stop_name": "AINAPURA BUS STAND",
         "city_name": "AINAPURA",
         "city_id": 976,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -21987,8 +21987,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.72003,
+          11.346827
         ]
       },
       "properties": {
@@ -21996,7 +21996,7 @@
         "stop_name": "ERODE BUS STAND",
         "city_name": "ERODE IRD",
         "city_id": 3139,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22004,8 +22004,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          76.6482639,
-          12.6662563
+          76.648264,
+          12.666256
         ]
       },
       "properties": {
@@ -22013,7 +22013,7 @@
         "stop_name": "MELUKOTE",
         "city_name": "MELUKOTE",
         "city_id": 199,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22030,7 +22030,7 @@
         "stop_name": "SRIRANGAPATNA",
         "city_name": "SRIRANGAPATNA",
         "city_id": 1436,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22038,8 +22038,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          78.392724,
+          13.166048
         ]
       },
       "properties": {
@@ -22047,7 +22047,7 @@
         "stop_name": "MULBAGAL",
         "city_name": "MULBAGAL",
         "city_id": 556,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22055,8 +22055,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          78.2719163,
-          12.9580972
+          78.330043,
+          13.107392
         ]
       },
       "properties": {
@@ -22064,7 +22064,7 @@
         "stop_name": "AVANI",
         "city_name": "AVANI",
         "city_id": 1166,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22072,8 +22072,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          78.180561,
+          12.985353
         ]
       },
       "properties": {
@@ -22081,7 +22081,7 @@
         "stop_name": "BANGARPETE",
         "city_name": "BANGARPETE",
         "city_id": 1998,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22089,8 +22089,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.867101,
+          12.895768
         ]
       },
       "properties": {
@@ -22098,7 +22098,7 @@
         "stop_name": "CHIKKATHIRUPATH",
         "city_name": "CHIKKA TIRUPATHI",
         "city_id": 2548,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22132,7 +22132,41 @@
         "stop_name": "MADURAI",
         "city_name": "MADURAI",
         "city_id": 3231,
-        "source": "estimate"
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.651048,
+          12.226414
+        ]
+      },
+      "properties": {
+        "stop_id": "C3116-dindivanam-bus-stand",
+        "stop_name": "DINDIVANAM BUS STAND",
+        "city_name": "DINDIVANAM",
+        "city_id": 3116,
+        "source": "manual"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.358139,
+          15.159983
+        ]
+      },
+      "properties": {
+        "stop_id": "C288-mariyammanahalli",
+        "stop_name": "MARIYAMMANAHALLI",
+        "city_name": "MARIYAMMANAHALLI",
+        "city_id": 288,
+        "source": "manual"
       }
     }
   ]

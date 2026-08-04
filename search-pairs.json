@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7262,
+  "matched_count": 7270,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -72621,6 +72621,86 @@
       "to_name": "Chitradurga",
       "from_matched_name": "Thambrahalli",
       "to_matched_name": "Chitradurga",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1063,
+      "to_city_id": 4885,
+      "from_name": "Harapanahalli",
+      "to_name": "Yenpoya",
+      "from_matched_name": "Harapanahalli",
+      "to_matched_name": "Yenpoya",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1461,
+      "to_city_id": 920,
+      "from_name": "Jewargi",
+      "to_name": "Holalkere",
+      "from_matched_name": "Jewargi",
+      "to_matched_name": "Holalkere",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1461,
+      "to_city_id": 2325,
+      "from_name": "Jewargi",
+      "to_name": "Chitradurga",
+      "from_matched_name": "Jewargi",
+      "to_matched_name": "Chitradurga",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1461,
+      "to_city_id": 2399,
+      "from_name": "Jewargi",
+      "to_name": "Channagiri",
+      "from_matched_name": "Jewargi",
+      "to_matched_name": "Channagiri",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1499,
+      "to_city_id": 920,
+      "from_name": "Surapura",
+      "to_name": "Holalkere",
+      "from_matched_name": "Surapura",
+      "to_matched_name": "Holalkere",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1499,
+      "to_city_id": 2325,
+      "from_name": "Surapura",
+      "to_name": "Chitradurga",
+      "from_matched_name": "Surapura",
+      "to_matched_name": "Chitradurga",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1499,
+      "to_city_id": 2399,
+      "from_name": "Surapura",
+      "to_name": "Channagiri",
+      "from_matched_name": "Surapura",
+      "to_matched_name": "Channagiri",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2336,
+      "to_city_id": 5111,
+      "from_name": "Kundapura",
+      "to_name": "Amparu",
+      "from_matched_name": "Kundapura",
+      "to_matched_name": "Amparu",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }
