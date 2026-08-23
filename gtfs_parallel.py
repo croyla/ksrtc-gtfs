@@ -16,6 +16,8 @@ import random
 import re
 import math
 
+from cache_cleanup import cleanup_stale_cache, DEFAULT_MAX_AGE_DAYS
+
 # ── CLI args ──────────────────────────────────────────────────────────────────
 
 parser = argparse.ArgumentParser(
@@ -45,6 +47,12 @@ parser.add_argument('--sentinel-to', type=int, default=296,
                     help='toCityID for sentinel date-range check (default: 296 Mysuru)')
 parser.add_argument('--max-dates', type=int, default=0,
                     help='Cap the number of service dates queried (0 = no cap, useful for test runs)')
+parser.add_argument('--lookback-days', type=int, default=2,
+                    help='Also include this many days before today in the GTFS horizon, so '
+                         'currently-running (e.g. overnight) trips that started before today stay '
+                         'in the dataset (default: 2). The KSRTC API rejects past journey dates, so '
+                         'these days are populated from api_cache only, never live-fetched -- a day '
+                         'with nothing cached simply contributes no trips.')
 parser.add_argument('--search-pairs', type=str, default='search-pairs.json',
                     help='Path to seed city-pair JSON (see scrape_abhibus_routes.py) used as the '
                          'starting candidate set for route discovery (default: search-pairs.json)')
@@ -103,6 +111,14 @@ OVERPASS_CACHE_DIR = os.path.join("tmp", "overpass_cache")
 CACHE_TTL = 30 * 24 * 3600  # 1 month
 os.makedirs(CACHE_DIR, exist_ok=True)
 os.makedirs(OVERPASS_CACHE_DIR, exist_ok=True)
+
+# Housekeeping: api_cache entries are never deleted on expiry (see cached_get
+# above), just ignored -- so without this the directory grows unbounded
+# across runs. See cache_cleanup.py for the standalone/cron version.
+_removed_stale_cache = cleanup_stale_cache(CACHE_DIR)
+if _removed_stale_cache:
+    logger.info(f"Cache cleanup: removed {_removed_stale_cache} stale api_cache file(s) older than "
+                f"{DEFAULT_MAX_AGE_DAYS} days")
 
 logger.info(f"Starting KSRTC GTFS generation from {START_DATE} (sentinel: {SENTINEL_FROM}→{SENTINEL_TO})")
 
@@ -198,6 +214,22 @@ def cached_get(url: str, params: dict | None = None, timeout: int = 15,
                 mock._content = json.dumps(entry["data"]).encode()
                 return mock
         except Exception:
+            pass
+
+    # The KSRTC API only serves current/future journey dates -- a request for a
+    # past date (e.g. one of the --lookback-days days we prepend to the horizon
+    # to keep currently-running trips visible) would just be rejected or come
+    # back empty, and an empty response here gets cached as a real "no trips"
+    # fact (see skip_cache_if_empty above), which would wrongly poison the
+    # cache for that pair/date. So a cache miss on a past date is a dead end,
+    # never a live request.
+    _request_date_str = (params or {}).get("journeyDate") or (params or {}).get("chartDate")
+    if _request_date_str:
+        try:
+            if datetime.strptime(_request_date_str, "%Y-%m-%d").date() < datetime.now().date():
+                logger.debug(f"Cache miss on past date, skipping live fetch: {url} params={params}")
+                return None
+        except ValueError:
             pass
 
     for attempt in range(_MAX_RETRIES):
@@ -836,6 +868,22 @@ if args.max_dates and len(service_dates) > args.max_dates:
     service_dates = service_dates[:args.max_dates]
     logger.info(f"  Capped to {args.max_dates} dates via --max-dates")
 
+# Prepend cache-only lookback days so trips that started before today (e.g.
+# overnight sleepers still en route) stay in the GTFS. These days are never
+# live-fetched -- see the past-date guard in cached_get -- so on a fresh
+# cache they simply contribute no trips rather than erroring.
+if args.lookback_days > 0:
+    _today_for_lookback = datetime.now().date()
+    lookback_dates = [
+        (_today_for_lookback - timedelta(days=i)).strftime("%Y-%m-%d")
+        for i in range(args.lookback_days, 0, -1)
+    ]
+    lookback_dates = [d for d in lookback_dates if d < service_dates[0]]
+    if lookback_dates:
+        service_dates = lookback_dates + service_dates
+        logger.info(f"  Prepended {len(lookback_dates)} cache-only lookback date(s) "
+                    f"({lookback_dates[0]} → {lookback_dates[-1]})")
+
 logger.info(f"Phase 2a complete: {len(service_dates)} service dates ({service_dates[0]} → {service_dates[-1]})")
 
 discovered_trips: dict[int, dict] = {}  # trip_id → trip metadata (first occurrence wins)
@@ -1289,20 +1337,23 @@ end_date = service_dates[-1].replace("-", "")
 
 service_dates_dt = [datetime.strptime(d, "%Y-%m-%d").date() for d in service_dates]
 
-# If discovery started today, a trip missing from just today's probe can be a
-# same-day booking-chart timing artifact (the chart may not be open yet, or
-# may already be past a per-day cutoff by the time this run queried it) --
-# not evidence the service doesn't actually run today. So when judging
-# regularity/full-coverage below, drop today from the horizon dates a service
-# is required to cover; a service matching on every *other* day still gets
-# treated as covering today too (the emitted calendar.txt start_date is the
-# unmodified global start_date either way, so this never shortens a service's
-# declared range -- it only widens which observed patterns qualify for
-# calendar.txt over calendar_dates.txt).
+# If today is in the horizon (it always is, unless --start-date pushed it into
+# the future), a trip missing from just today's probe can be a same-day
+# booking-chart timing artifact (the chart may not be open yet, or may already
+# be past a per-day cutoff by the time this run queried it) -- not evidence
+# the service doesn't actually run today. So when judging regularity/full-
+# coverage below, drop today from the horizon dates a service is required to
+# cover; a service matching on every *other* day still gets treated as
+# covering today too (the emitted calendar.txt start_date is the unmodified
+# global start_date either way, so this never shortens a service's declared
+# range -- it only widens which observed patterns qualify for calendar.txt
+# over calendar_dates.txt). Note this checks membership, not position: the
+# --lookback-days cache-only days prepended in Phase 2a now sit before today
+# in service_dates, so today is no longer necessarily service_dates_dt[0].
 _today = datetime.now().date()
 _regularity_horizon = (
     [d for d in service_dates_dt if d != _today]
-    if service_dates_dt and service_dates_dt[0] == _today
+    if _today in service_dates_dt
     else service_dates_dt
 )
 

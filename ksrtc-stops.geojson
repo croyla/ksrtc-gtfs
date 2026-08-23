@@ -22168,6 +22168,176 @@
         "city_id": 288,
         "source": "manual"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.841706,
+          12.885278
+        ]
+      },
+      "properties": {
+        "stop_id": "C30-mangaladevi-bus-stop",
+        "stop_name": "MANGALADEVI BUS STOP",
+        "city_name": "MANGALURU",
+        "city_id": 30,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C5079-jogfalls-and-return",
+        "stop_name": "JOGFALLS AND RETURN",
+        "city_name": "JOG FALLS PACKAGE",
+        "city_id": 5079,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.136977,
+          12.934693
+        ]
+      },
+      "properties": {
+        "stop_id": "C3294-vellore",
+        "stop_name": "VELLORE",
+        "city_name": "VELLORE",
+        "city_id": 3294,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.0648388,
+          16.7221439
+        ]
+      },
+      "properties": {
+        "stop_id": "C1580-satti",
+        "stop_name": "SATTI",
+        "city_name": "SATTI",
+        "city_id": 1580,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.2845725,
+          16.507557
+        ]
+      },
+      "properties": {
+        "stop_id": "C1637-savadi",
+        "stop_name": "SAVADI",
+        "city_name": "SAVADI",
+        "city_id": 1637,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.1697788,
+          16.5550961
+        ]
+      },
+      "properties": {
+        "stop_id": "C238-hipparagi-bs",
+        "stop_name": "HIPPARAGI BS",
+        "city_name": "HIPPARAGI",
+        "city_id": 238,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.210462,
+          10.517845
+        ]
+      },
+      "properties": {
+        "stop_id": "C2774-thrissur",
+        "stop_name": "THRISSUR",
+        "city_name": "THRISSUR",
+        "city_id": 2774,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.650662,
+          10.751949
+        ]
+      },
+      "properties": {
+        "stop_id": "C3266-trichy",
+        "stop_name": "TRICHY",
+        "city_name": "TRICHY",
+        "city_id": 3266,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-vijaynagar-bmtc-ttmc-b-s",
+        "stop_name": "VIJAYNAGAR BMTC TTMC B.S",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-malleshwaram-18th-b-s",
+        "stop_name": "MALLESHWARAM 18TH B.S",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
     }
   ]
 }
