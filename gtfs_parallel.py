@@ -15,8 +15,10 @@ import time
 import random
 import re
 import math
+import sqlite3
 
-from cache_cleanup import cleanup_stale_cache, DEFAULT_MAX_AGE_DAYS
+from cache_cleanup import (cleanup_stale_cache, cleanup_stale_dead_pairs,
+                            DEFAULT_MAX_AGE_DAYS, DEFAULT_DEAD_PAIR_MAX_AGE_DAYS)
 
 # ── CLI args ──────────────────────────────────────────────────────────────────
 
@@ -106,19 +108,94 @@ CITY_NAME_DEDUP = not args.no_city_name_dedup
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-CACHE_DIR = os.path.join("tmp", "api_cache")
+CACHE_DB = os.path.join("tmp", "api_cache.db")
 OVERPASS_CACHE_DIR = os.path.join("tmp", "overpass_cache")
 CACHE_TTL = 30 * 24 * 3600  # 1 month
-os.makedirs(CACHE_DIR, exist_ok=True)
+os.makedirs("tmp", exist_ok=True)
 os.makedirs(OVERPASS_CACHE_DIR, exist_ok=True)
 
-# Housekeeping: api_cache entries are never deleted on expiry (see cached_get
-# above), just ignored -- so without this the directory grows unbounded
-# across runs. See cache_cleanup.py for the standalone/cron version.
-_removed_stale_cache = cleanup_stale_cache(CACHE_DIR)
+# Housekeeping: api_cache rows are never deleted on expiry (see cached_get
+# above), just ignored -- so without this the db grows unbounded across
+# runs. See cache_cleanup.py for the standalone/cron version.
+_removed_stale_cache = cleanup_stale_cache(CACHE_DB)
 if _removed_stale_cache:
-    logger.info(f"Cache cleanup: removed {_removed_stale_cache} stale api_cache file(s) older than "
+    logger.info(f"Cache cleanup: removed {_removed_stale_cache} stale api_cache row(s) older than "
                 f"{DEFAULT_MAX_AGE_DAYS} days")
+
+_removed_dead_pairs = cleanup_stale_dead_pairs(CACHE_DB)
+if _removed_dead_pairs:
+    logger.info(f"Cache cleanup: removed {_removed_dead_pairs} stale dead_pairs row(s) older than "
+                f"{DEFAULT_DEAD_PAIR_MAX_AGE_DAYS} days")
+
+# Single shared connection guarded by a lock -- simpler than a connection per
+# thread, and local sqlite writes are fast enough next to the network calls
+# they sit alongside that serializing them isn't a bottleneck. Replaces the
+# old one-JSON-file-per-request scheme, which had grown to ~1.8M files
+# (~7.2GB, mostly filesystem block overhead) and made even `ls` slow.
+_cache_conn = sqlite3.connect(CACHE_DB, check_same_thread=False)
+_cache_conn.execute("PRAGMA journal_mode=WAL")
+_cache_conn.execute(
+    "CREATE TABLE IF NOT EXISTS cache ("
+    "key TEXT PRIMARY KEY, created_at REAL NOT NULL, expires_at REAL NOT NULL, data TEXT NOT NULL)"
+)
+_cache_conn.commit()
+_cache_lock = threading.Lock()
+
+
+def _cache_read(key: str):
+    """Return (expires_at, data) for key, or None if absent."""
+    with _cache_lock:
+        row = _cache_conn.execute("SELECT expires_at, data FROM cache WHERE key = ?", (key,)).fetchone()
+    if row is None:
+        return None
+    return row[0], json.loads(row[1])
+
+
+def _cache_write(key: str, data) -> None:
+    now = time.time()
+    with _cache_lock:
+        _cache_conn.execute(
+            "INSERT OR REPLACE INTO cache (key, created_at, expires_at, data) VALUES (?, ?, ?, ?)",
+            (key, now, now + CACHE_TTL, json.dumps(data)),
+        )
+        _cache_conn.commit()
+
+
+# Phase 2b.5's reachable×reachable grid (~200K pairs) re-probes the *same*
+# candidate pairs almost every run, but PROBE_DATE_WINDOW/BACKWARD_PEEK_DATES
+# is a 14-day window that slides forward with each run's start date -- so 1-2
+# trailing dates are always brand new and never cached. For an inactive pair
+# (the overwhelming majority -- ~205K of ~213K), probe_pair can only conclude
+# "no service" by exhausting every candidate date, which forces a live request
+# for those uncached trailing dates on nearly the whole grid, every single
+# run, even though the underlying fact (this pair isn't a real route) hasn't
+# changed. dead_pairs persists that fact directly, independent of the sliding
+# window, so Phase 2b.5 can skip re-probing it until DEAD_PAIR_TTL elapses.
+DEAD_PAIR_TTL = 30 * 24 * 3600  # 1 month -- same order as CACHE_TTL
+
+_cache_conn.execute(
+    "CREATE TABLE IF NOT EXISTS dead_pairs ("
+    "from_id INTEGER NOT NULL, to_id INTEGER NOT NULL, confirmed_at REAL NOT NULL, "
+    "PRIMARY KEY (from_id, to_id))"
+)
+_cache_conn.commit()
+
+
+def _is_dead_pair(from_id: int, to_id: int) -> bool:
+    with _cache_lock:
+        row = _cache_conn.execute(
+            "SELECT confirmed_at FROM dead_pairs WHERE from_id = ? AND to_id = ?", (from_id, to_id)
+        ).fetchone()
+    return row is not None and time.time() < row[0] + DEAD_PAIR_TTL
+
+
+def _mark_dead_pair(from_id: int, to_id: int) -> None:
+    with _cache_lock:
+        _cache_conn.execute(
+            "INSERT OR REPLACE INTO dead_pairs (from_id, to_id, confirmed_at) VALUES (?, ?, ?)",
+            (from_id, to_id, time.time()),
+        )
+        _cache_conn.commit()
 
 logger.info(f"Starting KSRTC GTFS generation from {START_DATE} (sentinel: {SENTINEL_FROM}→{SENTINEL_TO})")
 
@@ -178,16 +255,12 @@ def peek_cache(url: str, params: dict | None = None):
     or None if nothing is cached (or it's expired). Lets callers check whether a
     request has already been made — e.g. by a previous run, or by probing a
     different date — before deciding to issue a new live request."""
-    cache_file = os.path.join(CACHE_DIR, f"{_cache_key(url, params)}.json")
-    if not os.path.exists(cache_file):
+    entry = _cache_read(_cache_key(url, params))
+    if entry is None:
         return None
-    try:
-        with open(cache_file) as f:
-            entry = json.load(f)
-        if time.time() < entry["expires_at"]:
-            return entry["data"]
-    except Exception:
-        pass
+    expires_at, data = entry
+    if time.time() < expires_at:
+        return data
     return None
 
 
@@ -201,20 +274,16 @@ def cached_get(url: str, params: dict | None = None, timeout: int = 15,
     suppress that date for every run over the next month. Ordinary city-pair queries
     don't use this — an empty result there is a real, cacheable fact about that pair."""
     key = _cache_key(url, params)
-    cache_file = os.path.join(CACHE_DIR, f"{key}.json")
 
-    if os.path.exists(cache_file):
-        try:
-            with open(cache_file) as f:
-                entry = json.load(f)
-            if time.time() < entry["expires_at"]:
-                logger.debug(f"Cache hit: {url} params={params}")
-                mock = requests.models.Response()
-                mock.status_code = 200
-                mock._content = json.dumps(entry["data"]).encode()
-                return mock
-        except Exception:
-            pass
+    entry = _cache_read(key)
+    if entry is not None:
+        expires_at, data = entry
+        if time.time() < expires_at:
+            logger.debug(f"Cache hit: {url} params={params}")
+            mock = requests.models.Response()
+            mock.status_code = 200
+            mock._content = json.dumps(data).encode()
+            return mock
 
     # The KSRTC API only serves current/future journey dates -- a request for a
     # past date (e.g. one of the --lookback-days days we prepend to the horizon
@@ -249,9 +318,7 @@ def cached_get(url: str, params: dict | None = None, timeout: int = 15,
 
             if skip_cache_if_empty is None or not skip_cache_if_empty(data):
                 try:
-                    entry = {"expires_at": time.time() + CACHE_TTL, "data": data}
-                    with open(cache_file, "w") as f:
-                        json.dump(entry, f)
+                    _cache_write(key, data)
                 except Exception as e:
                     logger.warning(f"Failed to write cache for {url}: {e}")
             else:
@@ -936,9 +1003,10 @@ def _ingest_trips(trips: list[dict], date_str: str):
 
 
 def probe_pair(from_city_id: int, to_city_id: int, dates: list[str],
-               backward_peek_dates: list[str] = ()):
+               backward_peek_dates: list[str] = ()) -> bool:
     """Query one city pair across candidate dates, stopping at the first date with
     trips. A pair is only considered failed once every candidate date comes up empty.
+    Returns True if the pair was found active, False otherwise.
 
     Cache-aware: before issuing any live request, scan for a date already cached
     (a prior run, or another phase having probed that date/pair) and use it if it
@@ -963,7 +1031,7 @@ def probe_pair(from_city_id: int, to_city_id: int, dates: list[str],
                 active_pairs.append(pair)
                 pair_trip_ids[pair] = trip_ids
             _ingest_trips(trips, date_str)
-            return
+            return True
 
     for date_str in dates:
         resp = cached_get(
@@ -982,7 +1050,9 @@ def probe_pair(from_city_id: int, to_city_id: int, dates: list[str],
                 active_pairs.append(pair)
                 pair_trip_ids[pair] = trip_ids
             _ingest_trips(trips, date_str)
-            return
+            return True
+
+    return False
 
 
 def search_active_pair(from_city_id: int, to_city_id: int, date_str: str):
@@ -1107,30 +1177,39 @@ logger.info(f"Phase 2b complete: {len(active_pairs)} active pairs, "
 for round_num in range(1, args.max_expansion_rounds + 1):
     with active_pairs_lock:
         reachable = {c for pair in active_pairs for c in pair}
-    expansion_pairs = [
+    all_candidates = [
         (a, b)
         for a in reachable
         for b in reachable
         if a != b and (a, b) not in probed_pairs
     ]
+    expansion_pairs = [p for p in all_candidates if not _is_dead_pair(*p)]
+    skipped_dead = len(all_candidates) - len(expansion_pairs)
+    probed_pairs.update(all_candidates)  # dead-skipped pairs still shouldn't be re-probed later this run
+
     if not expansion_pairs:
-        logger.info(f"Phase 2b.5: no new pairs to probe after round {round_num - 1}; expansion converged")
+        if skipped_dead:
+            logger.info(f"Phase 2b.5: no new pairs to probe after round {round_num - 1} "
+                        f"({skipped_dead} known-dead pair(s) skipped); expansion converged")
+        else:
+            logger.info(f"Phase 2b.5: no new pairs to probe after round {round_num - 1}; expansion converged")
         break
 
     logger.info(f"Phase 2b.5 round {round_num}: probing {len(expansion_pairs)} pairs among "
-                f"{len(reachable)} reachable cities...")
-    probed_pairs.update(expansion_pairs)
+                f"{len(reachable)} reachable cities"
+                + (f" ({skipped_dead} known-dead pair(s) skipped)" if skipped_dead else "") + "...")
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = [executor.submit(probe_pair, f, t, PROBE_DATE_WINDOW, BACKWARD_PEEK_DATES)
-                   for f, t in expansion_pairs]
+        futures = {executor.submit(probe_pair, f, t, PROBE_DATE_WINDOW, BACKWARD_PEEK_DATES): (f, t)
+                   for f, t in expansion_pairs}
         done = 0
         for future in concurrent.futures.as_completed(futures):
             done += 1
+            if future.result() is False:
+                _mark_dead_pair(*futures[future])
             if done % 1000 == 0:
                 logger.info(f"  Expansion probe: {done}/{len(expansion_pairs)} done, "
                             f"{len(active_pairs)} active pairs, {len(discovered_trips)} trips")
-        concurrent.futures.wait(futures)
 
     logger.info(f"Phase 2b.5 round {round_num} complete: {len(active_pairs)} active pairs, "
                 f"{len(discovered_trips)} trips so far")
