@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7367,
+  "matched_count": 7377,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -73671,6 +73671,106 @@
       "to_name": "Kiab",
       "from_matched_name": "Gonikoppalu",
       "to_matched_name": "Kiab",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 383,
+      "to_city_id": 1280,
+      "from_name": "Srisailam",
+      "to_name": "Basavana Bagewadi",
+      "from_matched_name": "Srisailam",
+      "to_matched_name": "Basavana Bagewadi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 563,
+      "to_city_id": 864,
+      "from_name": "Davanagere",
+      "to_name": "Hunagund",
+      "from_matched_name": "Davanagere",
+      "to_matched_name": "Hunagund",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 563,
+      "to_city_id": 1245,
+      "from_name": "Davanagere",
+      "to_name": "Ilkal",
+      "from_matched_name": "Davanagere",
+      "to_matched_name": "Ilkal",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 569,
+      "to_city_id": 864,
+      "from_name": "Harihar",
+      "to_name": "Hunagund",
+      "from_matched_name": "Harihar",
+      "to_matched_name": "Hunagund",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 569,
+      "to_city_id": 1245,
+      "from_name": "Harihar",
+      "to_name": "Ilkal",
+      "from_matched_name": "Harihar",
+      "to_matched_name": "Ilkal",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 894,
+      "to_city_id": 2574,
+      "from_name": "Hunsur",
+      "to_name": "Alwayee",
+      "from_matched_name": "Hunsur",
+      "to_matched_name": "Alwayee",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1063,
+      "to_city_id": 864,
+      "from_name": "Harapanahalli",
+      "to_name": "Hunagund",
+      "from_matched_name": "Harapanahalli",
+      "to_matched_name": "Hunagund",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1063,
+      "to_city_id": 1245,
+      "from_name": "Harapanahalli",
+      "to_name": "Ilkal",
+      "from_matched_name": "Harapanahalli",
+      "to_matched_name": "Ilkal",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2652,
+      "to_city_id": 2574,
+      "from_name": "Kalpetta",
+      "to_name": "Alwayee",
+      "from_matched_name": "Kalpetta",
+      "to_matched_name": "Alwayee",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 3110,
+      "to_city_id": 2574,
+      "from_name": "Gonikoppalu",
+      "to_name": "Alwayee",
+      "from_matched_name": "Gonikoppalu",
+      "to_matched_name": "Alwayee",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }
