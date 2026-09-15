@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7377,
+  "matched_count": 7389,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -73771,6 +73771,126 @@
       "to_name": "Alwayee",
       "from_matched_name": "Gonikoppalu",
       "to_matched_name": "Alwayee",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 30,
+      "to_city_id": 1519,
+      "from_name": "Mangaluru",
+      "to_name": "Sirwara",
+      "from_matched_name": "Mangaluru",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 132,
+      "to_city_id": 1519,
+      "from_name": "Hubli",
+      "to_name": "Sirwara",
+      "from_matched_name": "Hubli",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 542,
+      "to_city_id": 1519,
+      "from_name": "Honnavara",
+      "to_name": "Sirwara",
+      "from_matched_name": "Honnavara",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 542,
+      "to_city_id": 2502,
+      "from_name": "Honnavara",
+      "to_name": "Lingasugur",
+      "from_matched_name": "Honnavara",
+      "to_matched_name": "Lingasugur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 565,
+      "to_city_id": 3091,
+      "from_name": "Navalgund",
+      "to_name": "Dharmastala",
+      "from_matched_name": "Navalgund",
+      "to_matched_name": "Dharmastala",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1696,
+      "to_city_id": 1519,
+      "from_name": "Bhatkal",
+      "to_name": "Sirwara",
+      "from_matched_name": "Bhatkal",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1696,
+      "to_city_id": 2502,
+      "from_name": "Bhatkal",
+      "to_name": "Lingasugur",
+      "from_matched_name": "Bhatkal",
+      "to_matched_name": "Lingasugur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2018,
+      "to_city_id": 1519,
+      "from_name": "Kumta",
+      "to_name": "Sirwara",
+      "from_matched_name": "Kumta",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2018,
+      "to_city_id": 2502,
+      "from_name": "Kumta",
+      "to_name": "Lingasugur",
+      "from_matched_name": "Kumta",
+      "to_matched_name": "Lingasugur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2075,
+      "to_city_id": 1519,
+      "from_name": "Udupi",
+      "to_name": "Sirwara",
+      "from_matched_name": "Udupi",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2336,
+      "to_city_id": 1519,
+      "from_name": "Kundapura",
+      "to_name": "Sirwara",
+      "from_matched_name": "Kundapura",
+      "to_matched_name": "Sirwara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2336,
+      "to_city_id": 2502,
+      "from_name": "Kundapura",
+      "to_name": "Lingasugur",
+      "from_matched_name": "Kundapura",
+      "to_matched_name": "Lingasugur",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }

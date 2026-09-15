@@ -22338,6 +22338,278 @@
         "city_id": 368,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C1323-jog-falls",
+        "stop_name": "JOG FALLS",
+        "city_name": "JOG FALLS",
+        "city_id": 1323,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C5079-jogfalls-bng-kbs-return",
+        "stop_name": "JOGFALLS BNG KBS RETURN",
+        "city_name": "JOG FALLS PACKAGE",
+        "city_id": 5079,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.859731,
+          18.499901
+        ]
+      },
+      "properties": {
+        "stop_id": "C2934-shivajinagar-b-s",
+        "stop_name": "SHIVAJINAGAR B.S",
+        "city_name": "PUNE",
+        "city_id": 2934,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.112671,
+          15.965963
+        ]
+      },
+      "properties": {
+        "stop_id": "C1245-ilkal",
+        "stop_name": "ILKAL",
+        "city_name": "ILKAL",
+        "city_id": 1245,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.193045,
+          15.751294
+        ]
+      },
+      "properties": {
+        "stop_id": "C2297-kustagi",
+        "stop_name": "KUSTAGI",
+        "city_name": "KUSTAGI",
+        "city_id": 2297,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.285919,
+          15.619017
+        ]
+      },
+      "properties": {
+        "stop_id": "C4-adoni",
+        "stop_name": "ADONI",
+        "city_name": "ADONI",
+        "city_id": 4,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.05985,
+          16.058748
+        ]
+      },
+      "properties": {
+        "stop_id": "C864-hunagund",
+        "stop_name": "HUNAGUND",
+        "city_name": "HUNAGUND",
+        "city_id": 864,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.476686,
+          19.763043
+        ]
+      },
+      "properties": {
+        "stop_id": "C2967-shirdi",
+        "stop_name": "SHIRDI",
+        "city_name": "SHIRDI",
+        "city_id": 2967,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.064871,
+          16.722168
+        ]
+      },
+      "properties": {
+        "stop_id": "C1138-athani",
+        "stop_name": "ATHANI",
+        "city_name": "ATHANI",
+        "city_id": 1138,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.641918,
+          13.133334
+        ]
+      },
+      "properties": {
+        "stop_id": "C2458-mudigere",
+        "stop_name": "MUDIGERE",
+        "city_name": "MUDIGERE",
+        "city_id": 2458,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.774627,
+          16.492579
+        ]
+      },
+      "properties": {
+        "stop_id": "C848-raybag",
+        "stop_name": "RAYBAG",
+        "city_name": "RAYBAG",
+        "city_id": 848,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-madivala-ksrtc-cntr",
+        "stop_name": "MADIVALA KSRTC CNTR",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.746311,
+          14.718549
+        ]
+      },
+      "properties": {
+        "stop_id": "C77-molakalmur",
+        "stop_name": "MOLAKALMUR",
+        "city_name": "MOLAKALMUR",
+        "city_id": 77,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-basaweshwaranagar-ttmc-b-s",
+        "stop_name": "BASAWESHWARANAGAR TTMC B S",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.797459,
+          10.812611
+        ]
+      },
+      "properties": {
+        "stop_id": "C2715-palakkad",
+        "stop_name": "PALAKKAD",
+        "city_name": "PALAKKAD",
+        "city_id": 2715,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.771689,
+          13.317974
+        ]
+      },
+      "properties": {
+        "stop_id": "C555-chikkamagaluru",
+        "stop_name": "CHIKKAMAGALURU",
+        "city_name": "CHIKKAMAGALURU",
+        "city_id": 555,
+        "source": "estimate"
+      }
     }
   ]
 }
