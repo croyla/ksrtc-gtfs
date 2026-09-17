@@ -22610,6 +22610,23 @@
         "city_id": 555,
         "source": "estimate"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.892352,
+          16.345172
+        ]
+      },
+      "properties": {
+        "stop_id": "C1152-almatti-cross-pump",
+        "stop_name": "ALMATTI CROSS PUMP",
+        "city_name": "ALAMATTI",
+        "city_id": 1152,
+        "source": "default"
+      }
     }
   ]
 }
