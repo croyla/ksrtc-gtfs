@@ -22627,6 +22627,23 @@
         "city_id": 1152,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C145-moratgi",
+        "stop_name": "MORATGI",
+        "city_name": "MORATGI",
+        "city_id": 145,
+        "source": "default"
+      }
     }
   ]
 }
