@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7389,
+  "matched_count": 7396,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -73891,6 +73891,76 @@
       "to_name": "Lingasugur",
       "from_matched_name": "Kundapura",
       "to_matched_name": "Lingasugur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1511,
+      "to_city_id": 219,
+      "from_name": "Shiroor",
+      "to_name": "Mandarti",
+      "from_matched_name": "Shiroor",
+      "to_matched_name": "Mandarti",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1511,
+      "to_city_id": 331,
+      "from_name": "Shiroor",
+      "to_name": "Kokkarni",
+      "from_matched_name": "Shiroor",
+      "to_matched_name": "Kokkarni",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1511,
+      "to_city_id": 422,
+      "from_name": "Shiroor",
+      "to_name": "Hebri",
+      "from_matched_name": "Shiroor",
+      "to_matched_name": "Hebri",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1511,
+      "to_city_id": 1456,
+      "from_name": "Shiroor",
+      "to_name": "Santhekatte",
+      "from_matched_name": "Shiroor",
+      "to_matched_name": "Santhekatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1511,
+      "to_city_id": 2106,
+      "from_name": "Shiroor",
+      "to_name": "Ujire",
+      "from_matched_name": "Shiroor",
+      "to_matched_name": "Ujire",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2354,
+      "to_city_id": 1511,
+      "from_name": "Koteswara",
+      "to_name": "Shiroor",
+      "from_matched_name": "Koteswara",
+      "to_matched_name": "Shiroor",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 3942,
+      "to_city_id": 1511,
+      "from_name": "Kota",
+      "to_name": "Shiroor",
+      "from_matched_name": "Kota",
+      "to_matched_name": "Shiroor",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }
