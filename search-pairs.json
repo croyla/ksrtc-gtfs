@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7396,
+  "matched_count": 7443,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -73961,6 +73961,476 @@
       "to_name": "Shiroor",
       "from_matched_name": "Kota",
       "to_matched_name": "Shiroor",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 132,
+      "to_city_id": 2865,
+      "from_name": "Hubli",
+      "to_name": "Karad",
+      "from_matched_name": "Hubli",
+      "to_matched_name": "Karad",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 132,
+      "to_city_id": 2983,
+      "from_name": "Hubli",
+      "to_name": "Satara",
+      "from_matched_name": "Hubli",
+      "to_matched_name": "Satara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 189,
+      "to_city_id": 1280,
+      "from_name": "Kurnool",
+      "to_name": "Basavana Bagewadi",
+      "from_matched_name": "Kurnool",
+      "to_matched_name": "Basavana Bagewadi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 266,
+      "to_city_id": 1990,
+      "from_name": "Mavinakatte",
+      "to_name": "Kammardi",
+      "from_matched_name": "Mavinakatte",
+      "to_matched_name": "Kammardi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 344,
+      "to_city_id": 458,
+      "from_name": "Nidagundi",
+      "to_name": "Bellary",
+      "from_matched_name": "Nidagundi",
+      "to_matched_name": "Bellary",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 344,
+      "to_city_id": 1152,
+      "from_name": "Nidagundi",
+      "to_name": "Alamatti",
+      "from_matched_name": "Nidagundi",
+      "to_matched_name": "Alamatti",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 344,
+      "to_city_id": 1436,
+      "from_name": "Nidagundi",
+      "to_name": "Srirangapatna",
+      "from_matched_name": "Nidagundi",
+      "to_matched_name": "Srirangapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 398,
+      "to_city_id": 2918,
+      "from_name": "Kalaburagi",
+      "to_name": "Devarhipparagi",
+      "from_matched_name": "Kalaburagi",
+      "to_matched_name": "Devarhipparagi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 453,
+      "to_city_id": 1436,
+      "from_name": "Vijayapura",
+      "to_name": "Srirangapatna",
+      "from_matched_name": "Vijayapura",
+      "to_matched_name": "Srirangapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 453,
+      "to_city_id": 2918,
+      "from_name": "Vijayapura",
+      "to_name": "Devarhipparagi",
+      "from_matched_name": "Vijayapura",
+      "to_matched_name": "Devarhipparagi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 563,
+      "to_city_id": 2865,
+      "from_name": "Davanagere",
+      "to_name": "Karad",
+      "from_matched_name": "Davanagere",
+      "to_matched_name": "Karad",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 563,
+      "to_city_id": 2983,
+      "from_name": "Davanagere",
+      "to_name": "Satara",
+      "from_matched_name": "Davanagere",
+      "to_matched_name": "Satara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 567,
+      "to_city_id": 2865,
+      "from_name": "Dharwad",
+      "to_name": "Karad",
+      "from_matched_name": "Dharwad",
+      "to_matched_name": "Karad",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 567,
+      "to_city_id": 2983,
+      "from_name": "Dharwad",
+      "to_name": "Satara",
+      "from_matched_name": "Dharwad",
+      "to_matched_name": "Satara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 569,
+      "to_city_id": 2865,
+      "from_name": "Harihar",
+      "to_name": "Karad",
+      "from_matched_name": "Harihar",
+      "to_matched_name": "Karad",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 569,
+      "to_city_id": 2870,
+      "from_name": "Harihar",
+      "to_name": "Kolhapur",
+      "from_matched_name": "Harihar",
+      "to_matched_name": "Kolhapur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 569,
+      "to_city_id": 2934,
+      "from_name": "Harihar",
+      "to_name": "Pune",
+      "from_matched_name": "Harihar",
+      "to_matched_name": "Pune",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 569,
+      "to_city_id": 2983,
+      "from_name": "Harihar",
+      "to_name": "Satara",
+      "from_matched_name": "Harihar",
+      "to_matched_name": "Satara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 579,
+      "to_city_id": 2865,
+      "from_name": "Haveri",
+      "to_name": "Karad",
+      "from_matched_name": "Haveri",
+      "to_matched_name": "Karad",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 579,
+      "to_city_id": 2983,
+      "from_name": "Haveri",
+      "to_name": "Satara",
+      "from_matched_name": "Haveri",
+      "to_matched_name": "Satara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 629,
+      "to_city_id": 1101,
+      "from_name": "Padubidre",
+      "to_name": "Sandur",
+      "from_matched_name": "Padubidre",
+      "to_matched_name": "Sandur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 864,
+      "to_city_id": 458,
+      "from_name": "Hunagund",
+      "to_name": "Bellary",
+      "from_matched_name": "Hunagund",
+      "to_matched_name": "Bellary",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 864,
+      "to_city_id": 1436,
+      "from_name": "Hunagund",
+      "to_name": "Srirangapatna",
+      "from_matched_name": "Hunagund",
+      "to_matched_name": "Srirangapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 931,
+      "to_city_id": 2865,
+      "from_name": "Ranebennur",
+      "to_name": "Karad",
+      "from_matched_name": "Ranebennur",
+      "to_matched_name": "Karad",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 931,
+      "to_city_id": 2983,
+      "from_name": "Ranebennur",
+      "to_name": "Satara",
+      "from_matched_name": "Ranebennur",
+      "to_matched_name": "Satara",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1101,
+      "to_city_id": 3091,
+      "from_name": "Sandur",
+      "to_name": "Dharmastala",
+      "from_matched_name": "Sandur",
+      "to_matched_name": "Dharmastala",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1152,
+      "to_city_id": 458,
+      "from_name": "Alamatti",
+      "to_name": "Bellary",
+      "from_matched_name": "Alamatti",
+      "to_matched_name": "Bellary",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1152,
+      "to_city_id": 552,
+      "from_name": "Alamatti",
+      "to_name": "Kunigal",
+      "from_matched_name": "Alamatti",
+      "to_matched_name": "Kunigal",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1152,
+      "to_city_id": 585,
+      "from_name": "Alamatti",
+      "to_name": "Mandya",
+      "from_matched_name": "Alamatti",
+      "to_matched_name": "Mandya",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1152,
+      "to_city_id": 1436,
+      "from_name": "Alamatti",
+      "to_name": "Srirangapatna",
+      "from_matched_name": "Alamatti",
+      "to_matched_name": "Srirangapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1152,
+      "to_city_id": 2638,
+      "from_name": "Alamatti",
+      "to_name": "Maddur",
+      "from_matched_name": "Alamatti",
+      "to_matched_name": "Maddur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1245,
+      "to_city_id": 458,
+      "from_name": "Ilkal",
+      "to_name": "Bellary",
+      "from_matched_name": "Ilkal",
+      "to_matched_name": "Bellary",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1245,
+      "to_city_id": 1436,
+      "from_name": "Ilkal",
+      "to_name": "Srirangapatna",
+      "from_matched_name": "Ilkal",
+      "to_matched_name": "Srirangapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1330,
+      "to_city_id": 3235,
+      "from_name": "Sullya",
+      "to_name": "Sathyamangalam",
+      "from_matched_name": "Sullya",
+      "to_matched_name": "Sathyamangalam",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1461,
+      "to_city_id": 2918,
+      "from_name": "Jewargi",
+      "to_name": "Devarhipparagi",
+      "from_matched_name": "Jewargi",
+      "to_matched_name": "Devarhipparagi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1562,
+      "to_city_id": 99,
+      "from_name": "Bhagamandala",
+      "to_name": "Mercara Madikeri",
+      "from_matched_name": "Bhagamandala",
+      "to_matched_name": "Mercara Madikeri",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1562,
+      "to_city_id": 784,
+      "from_name": "Bhagamandala",
+      "to_name": "Piriyapatna",
+      "from_matched_name": "Bhagamandala",
+      "to_matched_name": "Piriyapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1562,
+      "to_city_id": 1619,
+      "from_name": "Bhagamandala",
+      "to_name": "Suntikoppa",
+      "from_matched_name": "Bhagamandala",
+      "to_matched_name": "Suntikoppa",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1562,
+      "to_city_id": 2278,
+      "from_name": "Bhagamandala",
+      "to_name": "Kushal Nagar",
+      "from_matched_name": "Bhagamandala",
+      "to_matched_name": "Kushal Nagar",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1990,
+      "to_city_id": 283,
+      "from_name": "Kammardi",
+      "to_name": "Kalmane",
+      "from_matched_name": "Kammardi",
+      "to_matched_name": "Kalmane",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1990,
+      "to_city_id": 581,
+      "from_name": "Kammardi",
+      "to_name": "Kolar",
+      "from_matched_name": "Kammardi",
+      "to_matched_name": "Kolar",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1990,
+      "to_city_id": 839,
+      "from_name": "Kammardi",
+      "to_name": "Ramakrishnapura",
+      "from_matched_name": "Kammardi",
+      "to_matched_name": "Ramakrishnapura",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2297,
+      "to_city_id": 1436,
+      "from_name": "Kustagi",
+      "to_name": "Srirangapatna",
+      "from_matched_name": "Kustagi",
+      "to_matched_name": "Srirangapatna",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2647,
+      "to_city_id": 3110,
+      "from_name": "Kanhangad",
+      "to_name": "Gonikoppalu",
+      "from_matched_name": "Kanhangad",
+      "to_matched_name": "Gonikoppalu",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 3154,
+      "to_city_id": 596,
+      "from_name": "Gurumitkal",
+      "to_name": "Raichur",
+      "from_matched_name": "Gurumitkal",
+      "to_matched_name": "Raichur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 3218,
+      "to_city_id": 1133,
+      "from_name": "Melmarvatur",
+      "to_name": "Atmakur",
+      "from_matched_name": "Melmarvatur",
+      "to_matched_name": "Atmakur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 3218,
+      "to_city_id": 1449,
+      "from_name": "Melmarvatur",
+      "to_name": "Sira",
+      "from_matched_name": "Melmarvatur",
+      "to_matched_name": "Sira",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }
