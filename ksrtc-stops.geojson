@@ -5939,8 +5939,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.8183561,
-          13.7062309
+          75.819112,
+          13.708082
         ]
       },
       "properties": {
@@ -5948,7 +5948,7 @@
         "stop_name": "TARIKERE",
         "city_name": "TARIKERE",
         "city_id": 1917,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -6024,8 +6024,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          75.88899,
+          12.726767
         ]
       },
       "properties": {
@@ -6033,7 +6033,7 @@
         "stop_name": "SHANIVARASANTHE",
         "city_name": "SHANIVARASANTHE",
         "city_id": 1547,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -6211,8 +6211,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.9553764,
-          17.1744599
+          75.956237,
+          17.173731
         ]
       },
       "properties": {
@@ -6220,7 +6220,7 @@
         "stop_name": "INDI",
         "city_name": "INDI",
         "city_id": 549,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -7095,8 +7095,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          74.89419,
-          14.345475
+          74.893351,
+          14.346773
         ]
       },
       "properties": {
@@ -7104,7 +7104,7 @@
         "stop_name": "SIDDAPUR",
         "city_name": "SIDDAPURSRS",
         "city_id": 1098,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22115,7 +22115,7 @@
         "stop_name": "KOTESWARA",
         "city_name": "KOTESWARA",
         "city_id": 2354,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22217,7 +22217,7 @@
         "stop_name": "VELLORE",
         "city_name": "VELLORE",
         "city_id": 3294,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22225,8 +22225,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.0648388,
-          16.7221439
+          75.083352,
+          16.573324
         ]
       },
       "properties": {
@@ -22234,7 +22234,7 @@
         "stop_name": "SATTI",
         "city_name": "SATTI",
         "city_id": 1580,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22242,8 +22242,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.2845725,
-          16.507557
+          75.154151,
+          16.585653
         ]
       },
       "properties": {
@@ -22251,7 +22251,7 @@
         "stop_name": "SAVADI",
         "city_name": "SAVADI",
         "city_id": 1637,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22285,7 +22285,7 @@
         "stop_name": "THRISSUR",
         "city_name": "THRISSUR",
         "city_id": 2774,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22293,8 +22293,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          78.650662,
-          10.751949
+          78.68036,
+          10.798678
         ]
       },
       "properties": {
@@ -22302,7 +22302,7 @@
         "stop_name": "TRICHY",
         "city_name": "TRICHY",
         "city_id": 3266,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22404,7 +22404,7 @@
         "stop_name": "ILKAL",
         "city_name": "ILKAL",
         "city_id": 1245,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22421,7 +22421,7 @@
         "stop_name": "KUSTAGI",
         "city_name": "KUSTAGI",
         "city_id": 2297,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22438,7 +22438,7 @@
         "stop_name": "ADONI",
         "city_name": "ADONI",
         "city_id": 4,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22455,7 +22455,7 @@
         "stop_name": "HUNAGUND",
         "city_name": "HUNAGUND",
         "city_id": 864,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22472,7 +22472,7 @@
         "stop_name": "SHIRDI",
         "city_name": "SHIRDI",
         "city_id": 2967,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22489,7 +22489,7 @@
         "stop_name": "ATHANI",
         "city_name": "ATHANI",
         "city_id": 1138,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22506,7 +22506,7 @@
         "stop_name": "MUDIGERE",
         "city_name": "MUDIGERE",
         "city_id": 2458,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22523,7 +22523,7 @@
         "stop_name": "RAYBAG",
         "city_name": "RAYBAG",
         "city_id": 848,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22557,7 +22557,7 @@
         "stop_name": "MOLAKALMUR",
         "city_name": "MOLAKALMUR",
         "city_id": 77,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22582,8 +22582,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          76.797459,
-          10.812611
+          76.649163,
+          10.7676
         ]
       },
       "properties": {
@@ -22591,7 +22591,7 @@
         "stop_name": "PALAKKAD",
         "city_name": "PALAKKAD",
         "city_id": 2715,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
@@ -22608,7 +22608,7 @@
         "stop_name": "CHIKKAMAGALURU",
         "city_name": "CHIKKAMAGALURU",
         "city_id": 555,
-        "source": "estimate"
+        "source": "manual"
       }
     },
     {
