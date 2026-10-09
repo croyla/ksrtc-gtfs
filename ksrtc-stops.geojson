@@ -22644,6 +22644,125 @@
         "city_id": 145,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.307078,
+          14.660039
+        ]
+      },
+      "properties": {
+        "stop_id": "C972-ankola-hotel-kamat-bypass",
+        "stop_name": "ANKOLA HOTEL KAMAT BYPASS",
+        "city_name": "ANKOLA",
+        "city_id": 972,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.367835,
+          16.161943
+        ]
+      },
+      "properties": {
+        "stop_id": "C2511-lokapur",
+        "stop_name": "LOKAPUR",
+        "city_name": "LOKAPUR",
+        "city_id": 2511,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.132626,
+          16.767869
+        ]
+      },
+      "properties": {
+        "stop_id": "C611-yadgir",
+        "stop_name": "YADGIR",
+        "city_name": "YADGIR",
+        "city_id": 611,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.6203019,
+          13.122332
+        ]
+      },
+      "properties": {
+        "stop_id": "C431-hosahalli",
+        "stop_name": "HOSAHALLI",
+        "city_name": "HOSAHALLI",
+        "city_id": 431,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.62199,
+          16.346517
+        ]
+      },
+      "properties": {
+        "stop_id": "C1769-bilagi",
+        "stop_name": "BILAGI",
+        "city_name": "BILAGI",
+        "city_id": 1769,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.334822,
+          14.521856
+        ]
+      },
+      "properties": {
+        "stop_id": "C1332-jagalur",
+        "stop_name": "JAGALUR",
+        "city_name": "JAGALUR",
+        "city_id": 1332,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.817464,
+          11.932186
+        ]
+      },
+      "properties": {
+        "stop_id": "C3041-pondicherry",
+        "stop_name": "PONDICHERRY",
+        "city_name": "PONDICHERRY",
+        "city_id": 3041,
+        "source": "estimate"
+      }
     }
   ]
 }
