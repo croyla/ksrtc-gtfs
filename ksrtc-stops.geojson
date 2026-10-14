@@ -22763,6 +22763,57 @@
         "city_id": 3041,
         "source": "estimate"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.658418,
+          12.312683
+        ]
+      },
+      "properties": {
+        "stop_id": "C296-hinkal-flyover-signal",
+        "stop_name": "HINKAL FLYOVER SIGNAL",
+        "city_name": "MYSURU",
+        "city_id": 296,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.619949,
+          13.941598
+        ]
+      },
+      "properties": {
+        "stop_id": "C1201-hiriyur",
+        "stop_name": "HIRIYUR",
+        "city_name": "HIRIYUR",
+        "city_id": 1201,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.254238,
+          13.316129
+        ]
+      },
+      "properties": {
+        "stop_id": "C1059-arasikere",
+        "stop_name": "ARASIKERE",
+        "city_name": "ARASIKERE",
+        "city_id": 1059,
+        "source": "estimate"
+      }
     }
   ]
 }

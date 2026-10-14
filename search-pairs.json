@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7443,
+  "matched_count": 7480,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -74431,6 +74431,376 @@
       "to_name": "Sira",
       "from_matched_name": "Melmarvatur",
       "to_matched_name": "Sira",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 4,
+      "to_city_id": 163,
+      "from_name": "Adoni",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Adoni",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 30,
+      "to_city_id": 163,
+      "from_name": "Mangaluru",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Mangaluru",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 49,
+      "to_city_id": 163,
+      "from_name": "Manipal",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Manipal",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 113,
+      "to_city_id": 163,
+      "from_name": "Halady",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Halady",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 4,
+      "from_name": "Masthikatte",
+      "to_name": "Adoni",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Adoni",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 233,
+      "from_name": "Masthikatte",
+      "to_name": "Mantralaya",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Mantralaya",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 368,
+      "from_name": "Masthikatte",
+      "to_name": "Bengaluru",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Bengaluru",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 458,
+      "from_name": "Masthikatte",
+      "to_name": "Bellary",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Bellary",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 607,
+      "from_name": "Masthikatte",
+      "to_name": "Tumkur",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Tumkur",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 1342,
+      "from_name": "Masthikatte",
+      "to_name": "Shivamogga",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Shivamogga",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 1932,
+      "from_name": "Masthikatte",
+      "to_name": "Tirthahalli",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Tirthahalli",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 2325,
+      "from_name": "Masthikatte",
+      "to_name": "Chitradurga",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Chitradurga",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 163,
+      "to_city_id": 2561,
+      "from_name": "Masthikatte",
+      "to_name": "Challakere",
+      "from_matched_name": "Masthikatte",
+      "to_matched_name": "Challakere",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 233,
+      "to_city_id": 163,
+      "from_name": "Mantralaya",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Mantralaya",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 368,
+      "to_city_id": 163,
+      "from_name": "Bengaluru",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Bengaluru",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 458,
+      "to_city_id": 163,
+      "from_name": "Bellary",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Bellary",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 607,
+      "to_city_id": 163,
+      "from_name": "Tumkur",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Tumkur",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 629,
+      "to_city_id": 163,
+      "from_name": "Padubidre",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Padubidre",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 920,
+      "to_city_id": 163,
+      "from_name": "Holalkere",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Holalkere",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1061,
+      "to_city_id": 163,
+      "from_name": "Siddapurcdp",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Siddapurcdp",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1308,
+      "to_city_id": 163,
+      "from_name": "Saligrama",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Saligrama",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1318,
+      "to_city_id": 163,
+      "from_name": "Bidkalkatte",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Bidkalkatte",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1342,
+      "to_city_id": 163,
+      "from_name": "Shivamogga",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Shivamogga",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1456,
+      "to_city_id": 163,
+      "from_name": "Santhekatte",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Santhekatte",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1586,
+      "to_city_id": 163,
+      "from_name": "Surathkal",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Surathkal",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 1686,
+      "to_city_id": 163,
+      "from_name": "Shankarnarayana",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Shankarnarayana",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2008,
+      "to_city_id": 163,
+      "from_name": "Brahmavara",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Brahmavara",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2325,
+      "to_city_id": 163,
+      "from_name": "Chitradurga",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Chitradurga",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2336,
+      "to_city_id": 163,
+      "from_name": "Kundapura",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Kundapura",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2354,
+      "to_city_id": 163,
+      "from_name": "Koteswara",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Koteswara",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2399,
+      "to_city_id": 163,
+      "from_name": "Channagiri",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Channagiri",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2561,
+      "to_city_id": 163,
+      "from_name": "Challakere",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Challakere",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 2750,
+      "to_city_id": 163,
+      "from_name": "Mulki",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Mulki",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 5105,
+      "to_city_id": 163,
+      "from_name": "Sastan",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Sastan",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 5111,
+      "to_city_id": 163,
+      "from_name": "Amparu",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Amparu",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 5114,
+      "to_city_id": 163,
+      "from_name": "Haleyangadi",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Haleyangadi",
+      "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 5117,
+      "to_city_id": 163,
+      "from_name": "Thekkatte",
+      "to_name": "Masthikatte",
+      "from_matched_name": "Thekkatte",
+      "to_matched_name": "Masthikatte",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }
