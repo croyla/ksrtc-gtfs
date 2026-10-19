@@ -22814,6 +22814,91 @@
         "city_id": 1059,
         "source": "estimate"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.112314,
+          10.750097
+        ]
+      },
+      "properties": {
+        "stop_id": "C3263-tanjavoor",
+        "stop_name": "TANJAVOOR",
+        "city_name": "TANJAVOOR",
+        "city_id": 3263,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.650662,
+          10.751949
+        ]
+      },
+      "properties": {
+        "stop_id": "C3266-trichy-b-s",
+        "stop_name": "TRICHY B S",
+        "city_name": "TRICHY",
+        "city_id": 3266,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.196832,
+          13.075256
+        ]
+      },
+      "properties": {
+        "stop_id": "C3086-chennai",
+        "stop_name": "CHENNAI",
+        "city_name": "CHENNAI",
+        "city_id": 3086,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.680786,
+          15.920387
+        ]
+      },
+      "properties": {
+        "stop_id": "C975-badami",
+        "stop_name": "BADAMI",
+        "city_name": "BADAMI",
+        "city_id": 975,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-yelahanka-upanagar-bmtc-bs",
+        "stop_name": "YELAHANKA UPANAGAR BMTC BS",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
     }
   ]
 }
