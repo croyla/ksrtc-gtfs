@@ -22899,6 +22899,40 @@
         "city_id": 368,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.619949,
+          13.941598
+        ]
+      },
+      "properties": {
+        "stop_id": "C1201-hiriyuru-bypass-ranjitha-hotel",
+        "stop_name": "HIRIYURU BYPASS RANJITHA HOTEL",
+        "city_name": "HIRIYUR",
+        "city_id": 1201,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.817464,
+          11.932186
+        ]
+      },
+      "properties": {
+        "stop_id": "C3041-pondicherry-aft-ground-new-bs",
+        "stop_name": "PONDICHERRY AFT GROUND (NEW BS",
+        "city_name": "PONDICHERRY",
+        "city_id": 3041,
+        "source": "default"
+      }
     }
   ]
 }
