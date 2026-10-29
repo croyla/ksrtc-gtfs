@@ -22933,6 +22933,91 @@
         "city_id": 3041,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.032652,
+          13.824658
+        ]
+      },
+      "properties": {
+        "stop_id": "C377-nagara",
+        "stop_name": "NAGARA",
+        "city_name": "NAGARA",
+        "city_id": 377,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.124395,
+          17.771988
+        ]
+      },
+      "properties": {
+        "stop_id": "C119-humnabad",
+        "stop_name": "HUMNABAD",
+        "city_name": "HUMNABAD",
+        "city_id": 119,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.474112,
+          15.123737
+        ]
+      },
+      "properties": {
+        "stop_id": "C336-laxmeshwar",
+        "stop_name": "LAXMESHWAR",
+        "city_name": "LAXMESHWAR",
+        "city_id": 336,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          79.267173,
+          13.190916
+        ]
+      },
+      "properties": {
+        "stop_id": "C386-thugundrum",
+        "stop_name": "THUGUNDRUM",
+        "city_name": "THUGUNDRUM",
+        "city_id": 386,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-ghousia-college-opp-kmf",
+        "stop_name": "GHOUSIA COLLEGE OPP KMF",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
     }
   ]
 }

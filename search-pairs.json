@@ -1,7 +1,7 @@
 {
   "source": "https://www.abhibus.com/ksrtc-karnataka-bus-routes",
   "scraped_pairs_total": 1070,
-  "matched_count": 7480,
+  "matched_count": 7483,
   "unmatched_count": 43,
   "pairs": [
     {
@@ -74801,6 +74801,36 @@
       "to_name": "Masthikatte",
       "from_matched_name": "Thekkatte",
       "to_matched_name": "Masthikatte",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 4,
+      "to_city_id": 113,
+      "from_name": "Adoni",
+      "to_name": "Halady",
+      "from_matched_name": "Adoni",
+      "to_matched_name": "Halady",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 4,
+      "to_city_id": 1376,
+      "from_name": "Adoni",
+      "to_name": "Bhadravathi",
+      "from_matched_name": "Adoni",
+      "to_matched_name": "Bhadravathi",
+      "from_match_method": "ksrtc-discovered",
+      "to_match_method": "ksrtc-discovered"
+    },
+    {
+      "from_city_id": 4,
+      "to_city_id": 1588,
+      "from_name": "Adoni",
+      "to_name": "Kadur",
+      "from_matched_name": "Adoni",
+      "to_matched_name": "Kadur",
       "from_match_method": "ksrtc-discovered",
       "to_match_method": "ksrtc-discovered"
     }
