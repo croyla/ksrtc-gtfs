@@ -23018,6 +23018,176 @@
         "city_id": 368,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.808666,
+          12.510894
+        ]
+      },
+      "properties": {
+        "stop_id": "C2620-madapura",
+        "stop_name": "MADAPURA",
+        "city_name": "MADAPURA",
+        "city_id": 2620,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.152898,
+          14.563983
+        ]
+      },
+      "properties": {
+        "stop_id": "C982-anwatti",
+        "stop_name": "ANWATTI",
+        "city_name": "ANWATTI",
+        "city_id": 982,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.750412,
+          13.046213
+        ]
+      },
+      "properties": {
+        "stop_id": "C368-gandhi-nagar-mejestic",
+        "stop_name": "GANDHI NAGAR MEJESTIC",
+        "city_name": "BENGALURU",
+        "city_id": 368,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.816215,
+          18.614962
+        ]
+      },
+      "properties": {
+        "stop_id": "C2932-pimpri",
+        "stop_name": "PIMPRI",
+        "city_name": "PIMPRI",
+        "city_id": 2932,
+        "source": "estimate"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.841706,
+          12.885278
+        ]
+      },
+      "properties": {
+        "stop_id": "C30-pvs-circle-hotel-ayodhya",
+        "stop_name": "PVS CIRCLE- HOTEL AYODHYA",
+        "city_name": "MANGALURU",
+        "city_id": 30,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.668256,
+          14.525524
+        ]
+      },
+      "properties": {
+        "stop_id": "C5119-hirehalli",
+        "stop_name": "HIREHALLI",
+        "city_name": "HIREHALLI",
+        "city_id": 5119,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          74.841706,
+          12.885278
+        ]
+      },
+      "properties": {
+        "stop_id": "C30-naguri-bus-stand",
+        "stop_name": "NAGURI BUS STAND",
+        "city_name": "MANGALURU",
+        "city_id": 30,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          73.956117,
+          15.287942
+        ]
+      },
+      "properties": {
+        "stop_id": "C432-ponda-b-s",
+        "stop_name": "PONDA.B.S",
+        "city_name": "MARGAO",
+        "city_id": 432,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C2765-madakasira-bus-stand",
+        "stop_name": "MADAKASIRA BUS STAND",
+        "city_name": "MADAKASIRA",
+        "city_id": 2765,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C2256-koratagere",
+        "stop_name": "KORATAGERE",
+        "city_name": "KORATAGERE",
+        "city_id": 2256,
+        "source": "default"
+      }
     }
   ]
 }
