@@ -14405,8 +14405,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          77.424877,
+          15.938943
         ]
       },
       "properties": {
@@ -14414,7 +14414,7 @@
         "stop_name": "MANTRALAYA",
         "city_name": "MANTRALAYA",
         "city_id": 233,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -15459,8 +15459,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          73.837365,
+          15.495345
         ]
       },
       "properties": {
@@ -15468,7 +15468,7 @@
         "stop_name": "PANAJI GOA",
         "city_name": "PANAJI GOA",
         "city_id": 442,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -16615,8 +16615,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          76.288789,
+          9.977776
         ]
       },
       "properties": {
@@ -16624,7 +16624,7 @@
         "stop_name": "ERNAKULAM",
         "city_name": "ERNAKULAM",
         "city_id": 2596,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22174,8 +22174,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          74.841706,
-          12.885278
+          74.845791,
+          12.849487
         ]
       },
       "properties": {
@@ -22183,7 +22183,7 @@
         "stop_name": "MANGALADEVI BUS STOP",
         "city_name": "MANGALURU",
         "city_id": 30,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22191,8 +22191,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.7139,
-          15.3173
+          74.809251,
+          14.223872
         ]
       },
       "properties": {
@@ -22200,7 +22200,7 @@
         "stop_name": "JOGFALLS AND RETURN",
         "city_name": "JOG FALLS PACKAGE",
         "city_id": 5079,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22259,8 +22259,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          75.1697788,
-          16.5550961
+          75.171696,
+          16.554447
         ]
       },
       "properties": {
@@ -22268,7 +22268,7 @@
         "stop_name": "HIPPARAGI BS",
         "city_name": "HIPPARAGI",
         "city_id": 238,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22310,8 +22310,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.750412,
-          13.046213
+          77.535041,
+          12.965179
         ]
       },
       "properties": {
@@ -22319,7 +22319,7 @@
         "stop_name": "VIJAYNAGAR BMTC TTMC B.S",
         "city_name": "BENGALURU",
         "city_id": 368,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
@@ -22327,8 +22327,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          77.750412,
-          13.046213
+          77.569152,
+          13.008814
         ]
       },
       "properties": {
@@ -22336,7 +22336,7 @@
         "stop_name": "MALLESHWARAM 18TH B.S",
         "city_name": "BENGALURU",
         "city_id": 368,
-        "source": "default"
+        "source": "manual"
       }
     },
     {
