@@ -23188,6 +23188,40 @@
         "city_id": 2256,
         "source": "default"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          75.7139,
+          15.3173
+        ]
+      },
+      "properties": {
+        "stop_id": "C2912-gaanagapur",
+        "stop_name": "GAANAGAPUR",
+        "city_name": "GAANAGAPUR",
+        "city_id": 2912,
+        "source": "default"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          76.902313,
+          13.739724
+        ]
+      },
+      "properties": {
+        "stop_id": "C1449-sira",
+        "stop_name": "SIRA",
+        "city_name": "SIRA",
+        "city_id": 1449,
+        "source": "default"
+      }
     }
   ]
 }
